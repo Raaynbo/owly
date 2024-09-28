@@ -8,7 +8,8 @@ const content = document.querySelector(".app");
 
 
 const app = function (){
-	const user = User("Raaynbo");
+	const user = new User("Raaynbo");
+	console.log(user);
 
 	introduction(user);
 
@@ -18,7 +19,13 @@ const app = function (){
 
 	console.table(user.projects[0].tasks);
 	
-	content.textContent = user.projects[0].tasks;
+	content.textContent = user.projects[0].tasks.name;
+
+	user.createNewTask(0, "My task")
+	
+	console.log(user.projects[0].tasks);
+
+	
 }
 
 

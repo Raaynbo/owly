@@ -1,8 +1,11 @@
 
-const todo = function() {
-	const name = tname;
-	const tasks = [];
+class Todo {
+	constructor(tname){
+		this.name = tname;
+		this.tasks = [];
+	}
 	
-
-	return {};
 }
+
+
+export {todo};
