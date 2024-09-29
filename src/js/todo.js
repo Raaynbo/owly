@@ -1,4 +1,3 @@
-
 class Todo {
 	constructor(tname){
 		this.name = tname;
@@ -8,4 +7,4 @@ class Todo {
 }
 
 
-export {todo};
+export {Todo};
