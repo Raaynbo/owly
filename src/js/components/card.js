@@ -58,4 +58,4 @@ function createActionZone(container){
 	actcontainer.appendChild(action_3);
 }
 
-export {createCard, populateElement};
+export {createCard};

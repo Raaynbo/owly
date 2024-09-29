@@ -1,4 +1,4 @@
-import {createCard, populateElement} from "../js/components/card.js";
+import {createCard} from "../js/components/card.js";
 
 function homeView(app, user){
 	const main = document.createElement('div');
