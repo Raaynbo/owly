@@ -1,14 +1,17 @@
 import {Project} from "../js/projects.js"; 
 import {createCard} from "../js/components/card.js";
+import {renderApp} from "../index.js";
 
 function detailView(app, object){
 	const main = document.createElement('div');
 	const navbar = document.createElement('nav');
+	const home_btn = document.createElement("span");
 	const project_container = document.createElement('div');
 	const tree_container = document.createElement('div');
 	const stat_section = document.createElement('div');
 	const my_task = document.createElement('div');
 	//project_container.textContent = object.project.name;
+
 	switch(object.type){
 		case "project":
 			object.project.steps.forEach((task) => {
@@ -22,6 +25,14 @@ function detailView(app, object){
 	my_task.classList.add("task_list");
 	stat_section.classList.add("stats");
 	stat_section.textContent = "stats section"; 
+	home_btn.textContent = "home"; 
+	
+	home_btn.addEventListener("click",(e)=> {
+		renderApp("home");
+	})	
+
+	navbar.appendChild(home_btn);
+
 	app.appendChild(main);
 	app.appendChild(navbar);
 
