@@ -31,6 +31,11 @@ function detailView(app, object){
 		renderApp("home");
 	})	
 
+	project_container.addEventListener("click", (e) => {
+		if (e.target.classList.contains("card")){
+			renderApp("detail", e.target.itemInfo);
+		}
+	})
 	navbar.appendChild(home_btn);
 
 	app.appendChild(main);
