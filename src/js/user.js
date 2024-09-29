@@ -13,9 +13,9 @@ class User{
 		this.projects.push(newPjt);
 	};
 
-	createNewTask(id, name="my first task", desc = "learn more about task management with Owly", duration = 0, creationDate = new Date(), hasSubtask = false){
-		const newTask = new Task(name, desc, duration, creationDate, hasSubtask);
-		this.projects[this.projectFocused].tasks.push(newTask);
+	createNewTask(id, name="my first task", desc = "learn more about task management with Owly", duration = 0, creationDate = new Date()){
+		const newTask = new Task(name, desc, duration, creationDate);
+		this.projects[this.projectFocused].steps.push(newTask);
 	};
 
 	setProjectFocused(pid){

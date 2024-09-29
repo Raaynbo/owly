@@ -1,4 +1,5 @@
-import {task} from "./task.js";
+import {Task} from "./task.js";
+import {Step} from "./step.js";
 
 class Project  {
 	constructor (pname, desc,finished, fav){
@@ -6,8 +7,9 @@ class Project  {
 		this.description= desc;
 		this.state= finished;
 		this.favorite= fav;
-		this.tasks = [];
+		this.steps = [];
 	}
+
 	
 }
 

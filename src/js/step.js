@@ -1,4 +1,4 @@
-class Todo {
+class Step {
 	constructor(tname){
 		this.name = tname;
 		this.tasks = [];
@@ -7,4 +7,4 @@ class Todo {
 }
 
 
-export {Todo};
+export {Step};

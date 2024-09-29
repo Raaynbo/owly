@@ -12,7 +12,7 @@ const app = function (){
 
 	introduction(user);
 
-	content.textContent = user.projects[0].tasks.name;
+	content.textContent = user.projects[0].steps[0].name;
 
 	user.createNewTask(0, "My task")
 
