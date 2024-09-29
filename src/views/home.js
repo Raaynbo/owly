@@ -1,4 +1,5 @@
 import {createCard} from "../js/components/card.js";
+import {renderApp} from "../index.js";
 
 function homeView(app, user){
 	const main = document.createElement('div');
@@ -20,11 +21,20 @@ function homeView(app, user){
 	main.appendChild(tree_container);
 	
 	user.projects.forEach((project) => {
-		createCard(project_container, ["list"], project);
-		const card = document.createElement('div');
-		card.textContent = user.projects[0].name;
-		card.classList.add("card");
+		createCard(project_container, ["list"], project, "project");
+		
 	})
+	project_container.addEventListener("click", (e) => {
+		if (e.target.classList.contains("card")){
+			renderApp("detail", e.target.itemInfo);
+		}
+	})
+	const list_el = document.querySelectorAll("li");
+	list_el.forEach((el) => { 
+	el.addEventListener("click",(e) => {
+			renderApp("detail", el.itemInfo)
+		});
+	});
 }
 
 export {homeView};

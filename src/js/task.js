@@ -9,7 +9,7 @@ class Task{
 		this.state = 0;	
 		this.session = [];
 		this.active = false;
-		this.subtask = [];
+		this.steps = [];
 	}
 
 	startTask(){
@@ -45,7 +45,7 @@ class Task{
 
 	createSubtask(name="my first sub task", desc = "learn more about task management with Owly", duration = 0, creationDate = new Date()){
 		const nTask = new Task(name, desc, duration, creationDate);
-		this.subtask.push(nTask);
+		this.steps.push(nTask);
 	}
 
 	msToMinutes(ms) {
