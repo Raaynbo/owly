@@ -12,7 +12,6 @@ function startATask(user, pid){
 	const target = user.projects[pid].steps[0];
 	target.startTask();
 	target.createSubtask();
-	console.log(target);
 	setTimeout(() => {
 		target.endTask()
 		console.log(target);

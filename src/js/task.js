@@ -18,7 +18,6 @@ class Task{
 			return ;
 		}
 		this.startWipDate = Date.now();
-		console.log(this.startWipDate);
 		console.log(`task ${this.name} is started, now focus on it and come back when you finish`);
 		this.state = 1;
 		this.active = true;

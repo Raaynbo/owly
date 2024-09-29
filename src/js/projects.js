@@ -1,5 +1,4 @@
 import {Task} from "./task.js";
-import {Step} from "./step.js";
 
 class Project  {
 	constructor (pname, desc,finished, fav){
@@ -8,6 +7,10 @@ class Project  {
 		this.state= finished;
 		this.favorite= fav;
 		this.steps = [];
+	}
+
+	addSteps(step){
+		this.steps.push(step);	
 	}
 
 	

@@ -2,3 +2,39 @@ body {
 	margin: 0;
 	padding: 0;
 }
+
+.app {
+	height: 100vh;
+	width: 100vw;
+}
+
+.home_main {
+	height: 96vh;
+	width: 100%;
+	background-color: whitesmoke;
+	display: flex;
+}
+
+.main_container {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.side_container {
+	height: 100%;
+	width: 30%;
+}
+
+.small {
+	width: 4%;
+	background-color: gold;
+}
+
+
+.navbar {
+	height: 4vh;
+	width: 100%;
+	background-color: lightgray;
+}
