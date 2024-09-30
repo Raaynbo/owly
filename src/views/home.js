@@ -32,6 +32,13 @@ function homeView(app, user){
 	const list_el = document.querySelectorAll("li");
 	list_el.forEach((el) => { 
 	el.addEventListener("click",(e) => {
+			console.log(el.parentNode.parentNode.itemInfo);
+			el.itemInfo = {
+			task: el.itemInfo.task,
+			id: el.itemInfo.id,
+			project: el.parentNode.parentNode.itemInfo.project,
+			type:"hasSubTask"
+			}
 			renderApp("detail", el.itemInfo)
 		});
 	});

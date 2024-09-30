@@ -13,11 +13,14 @@ function detailView(app, object){
 	const my_task = document.createElement('div');
 	const info_container = document.createElement('div');
 	//project_container.textContent = object.project.name;
+//
+//
+	console.log(object);
 	
-	createInfo(info_container, object.project);
+	createInfo(info_container, object);
 	
 	switch(object.type){
-		case "project":
+		case "hasSubTask":
 			object.project.steps.forEach((task) => {
 				createCard(my_task,["list"],task, "task");
 			});
@@ -58,8 +61,23 @@ function detailView(app, object){
 }
 
 function createInfo(container, object){
-	
-	for (const key in object){
+	const project  = object.project;
+	if (object.task != undefined){
+		const task = object.task;
+		for (const key in task){
+			const infodiv = document.createElement('div');
+
+			if (hidden_info.find((el) => {
+			return el == key;
+			})){
+				continue ;		
+			}
+			infodiv.textContent = key + " : " + task[key];
+			infodiv.id = key;
+			container.appendChild(infodiv);
+		}
+	}
+	for (const key in project){
 		const infodiv = document.createElement('div');
 
 		if (hidden_info.find((el) => {
@@ -67,7 +85,7 @@ function createInfo(container, object){
 		})){
 			continue ;		
 		}
-		infodiv.textContent = key + " : " + object[key];
+		infodiv.textContent = key + " : " + project[key];
 		infodiv.id = key;
 		container.appendChild(infodiv);
 	}
