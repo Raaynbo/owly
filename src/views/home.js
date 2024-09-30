@@ -15,7 +15,7 @@ function homeView(app, user){
 
 	project_container.classList.add("main_container");
 	tree_container.classList.add("side_container");
-	tree_container.classList.add("small");
+	tree_container.classList.add("small_side");
 	
 	main.appendChild(project_container);
 	main.appendChild(tree_container);

@@ -34,7 +34,8 @@ class Task{
 		this.session.push([this.startWipDate, this.endWipDate]);
 		this.state = 1;
 		this.active = false;
-		this.startWipDate, this.endWipDate = 0;
+		this.startWipDate = 0;
+		this.endWipDate = 0;
 		
 	}
 

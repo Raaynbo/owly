@@ -34,6 +34,12 @@ body {
 	width: 30%;
 }
 
+
+.small_side {
+	width: 4%;
+	background-color: gold;
+}
+
 .small {
 	height: 4%;
 	width: 100%;
@@ -58,4 +64,11 @@ body {
 	display: flex;
 	align-items: center;
 	background-color: lightgray;
+}
+
+.info_container {
+	background-color: black;
+	color: white;
+	width: 100%;
+	height: fit-content;
 }
