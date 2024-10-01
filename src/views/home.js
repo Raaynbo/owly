@@ -32,7 +32,19 @@ function homeView(app, user){
 	const list_el = document.querySelectorAll("li");
 	list_el.forEach((el) => { 
 	el.addEventListener("click",(e) => {
-			renderApp("detail", el.itemInfo)
+			let pjt = el;
+			while (!pjt.classList.contains("card")){
+				console.log(pjt.itemInfo);
+				pjt = pjt.parentNode;
+				console.log(pjt.itemInfo);
+			}
+			pjt.itemInfo = {
+				project: pjt.itemInfo.project,
+				type: "task",
+				task: el.itemInfo.task
+			}
+			console.log(pjt.itemInfo);
+			renderApp("detail", pjt.itemInfo)
 		});
 	});
 }
