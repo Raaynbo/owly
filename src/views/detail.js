@@ -12,9 +12,11 @@ function detailView(app, object){
 	const tree_container = document.createElement('div');
 	const my_task = document.createElement('div');
 	const info_container = document.createElement('div');
+	const info_project = document.createElement('div');
+	const info_task = document.createElement('div');
 	//project_container.textContent = object.project.name;
 	
-	createInfo(info_container, object.project);
+	createInfo(info_task, object.project);
 	
 	switch(object.type){
 		case "project":
@@ -31,6 +33,9 @@ function detailView(app, object){
 	home_btn.textContent = "home"; 
 	project_container.classList.add("main_container");
 	project_container.classList.add("detail");
+	project_container.classList.add("detail");
+	info_project.classList.add("card");
+	info_task.classList.add("card");
 	
 	tree_container.classList.add("side_container");
 	tree_container.classList.add("small");
@@ -44,6 +49,8 @@ function detailView(app, object){
 	main.appendChild(project_container);
 	main.appendChild(tree_container);
 	project_container.appendChild(info_container);
+	info_container.appendChild(info_project);
+	info_container.appendChild(info_task);
 	project_container.appendChild(my_task);
 	
 	home_btn.addEventListener("click",(e)=> {
@@ -58,7 +65,6 @@ function detailView(app, object){
 }
 
 function createInfo(container, object){
-	
 	for (const key in object){
 		const infodiv = document.createElement('div');
 
