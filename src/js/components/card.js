@@ -6,7 +6,7 @@ function createCard(container, attribute=[], data, type){
 	card.textContent = data.name;
 	card.itemInfo = {
 			project: data,
-			type:"project"
+			type:"hasSubTask"
 	};
 
 	attribute.forEach((attr) => {
