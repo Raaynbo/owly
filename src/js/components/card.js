@@ -1,12 +1,12 @@
-function createCard(container, attribute=[], data, type){
+function createCard(container, attribute=[], data, type, project){
 	const card = document.createElement('div');
 
 	card.classList.add("card");
 	
 	card.textContent = data.name;
 	card.itemInfo = {
-			project: data,
-			type:"hasSubTask"
+			project: project,
+			task: data
 	};
 
 	attribute.forEach((attr) => {

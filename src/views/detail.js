@@ -14,22 +14,9 @@ function detailView(app, object){
 	const info_container = document.createElement('div');
 	const info_project = document.createElement('div');
 	const info_task = document.createElement('div');
-	console.log(object);
+	console.log(object)
 	
 
-	if ( object.project != object.task){
-		createInfo(info_task, object.task);
-	}
-	createInfo(info_project, object.project);
-
-	object.project.steps.forEach((task) => {
-		createCard(my_task,["list"],task, "task");
-	});
-	
-	switch(object.type){
-		case "hasSubTask":
-			break;
-	}	
 
 	main.classList.add("detail_main");
 	info_container.classList.add("info_container");
@@ -54,21 +41,42 @@ function detailView(app, object){
 	main.appendChild(project_container);
 	main.appendChild(tree_container);
 	project_container.appendChild(info_container);
-	info_container.appendChild(info_project);
-	info_container.appendChild(info_task);
 	project_container.appendChild(my_task);
+	
+	createInfo(info_project, object.project);
+	info_container.appendChild(info_project);
+	if ( object.project != object.task){
+		createInfo(info_task, object.task);
+		info_container.appendChild(info_task);
+	}
+
+	object.task.steps.forEach((task) => {
+		createCard(my_task,["list"],task, "task", object.project);
+	});
 	
 	home_btn.addEventListener("click",(e)=> {
 		renderApp("home");
 	})	
 
-	project_container.addEventListener("click", (e) => {
-		if (e.target.classList.contains("card")){
+	//const cards = document.querySelectorAll(".card");
+	//cards.forEach((card) =>{ card.addEventListener("click", (e)=>{
+	//		renderApp("detail", e.target.itemInfo);
+	//	});
+	//});
+	my_task.addEventListener("click", (e)=>{
+		if(e.target.classList.contains("card")){
 			renderApp("detail", e.target.itemInfo);
 		}
-	})
+	});
+	info_project.addEventListener("click", (e) => {
+		object = {
+			project: object.project,
+			task: object.project
+		}
+		console.log(object)
+		renderApp("detail", object)})
 }
-
+//	addEventListener("click", (e) => {
 function createInfo(container, object){
 	for (const key in object){
 		const infodiv = document.createElement('div');

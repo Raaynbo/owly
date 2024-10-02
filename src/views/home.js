@@ -21,7 +21,7 @@ function homeView(app, user){
 	main.appendChild(tree_container);
 	
 	user.projects.forEach((project) => {
-		createCard(project_container, ["list"], project, "project");
+		createCard(project_container, ["list"], project, "project", project);
 		
 	})
 	project_container.addEventListener("click", (e) => {

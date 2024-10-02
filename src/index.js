@@ -34,7 +34,6 @@ function renderApp(page, object){
 			homeView(content, user);
 			break;
 		case "detail":
-			console.log(object)
 			detailView(content, object);
 			break;
 	}
