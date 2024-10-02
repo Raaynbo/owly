@@ -71,3 +71,17 @@ body {
 	height: fit-content;
 	display: flex;
 }
+
+.worktable {
+	height: 70%;
+	width: 100%;
+	background-color: whitesmoke;
+}
+
+.editzone {
+	background-color: whitesmoke;
+	width: -webkit-fill-available;
+	height: -webkit-fill-available;
+	margin: 1rem;
+	padding: 1rem;
+}

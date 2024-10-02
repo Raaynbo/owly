@@ -14,9 +14,9 @@ function detailView(app, object){
 	const info_container = document.createElement('div');
 	const info_project = document.createElement('div');
 	const info_task = document.createElement('div');
-	console.log(object)
 	
 
+	console.log(object.task)
 
 	main.classList.add("detail_main");
 	info_container.classList.add("info_container");
@@ -50,19 +50,21 @@ function detailView(app, object){
 		info_container.appendChild(info_task);
 	}
 
-	object.task.steps.forEach((task) => {
-		createCard(my_task,["list"],task, "task", object.project);
-	});
+	if (object.task.steps.length != 0){
+		object.task.steps.forEach((task) => {
+			createCard(my_task,["list"],task, "task", object.project);
+		});
+	}else{
+		my_task.textContent = "we are here to work";
+		createWorktable(my_task)
+		my_task.classList.add("worktable")
+
+	}
 	
 	home_btn.addEventListener("click",(e)=> {
 		renderApp("home");
 	})	
 
-	//const cards = document.querySelectorAll(".card");
-	//cards.forEach((card) =>{ card.addEventListener("click", (e)=>{
-	//		renderApp("detail", e.target.itemInfo);
-	//	});
-	//});
 	my_task.addEventListener("click", (e)=>{
 		if(e.target.classList.contains("card")){
 			renderApp("detail", e.target.itemInfo);
@@ -73,7 +75,6 @@ function detailView(app, object){
 			project: object.project,
 			task: object.project
 		}
-		console.log(object)
 		renderApp("detail", object)})
 }
 //	addEventListener("click", (e) => {
@@ -90,6 +91,16 @@ function createInfo(container, object){
 		infodiv.id = key;
 		container.appendChild(infodiv);
 	}
+}
+
+function createWorktable(container){
+	const buttonzone = document.createElement('div');
+	const editzone = document.createElement('textarea');
+	
+	editzone.classList.add("editzone");
+
+	container.appendChild(editzone);
+	
 }
 
 export {detailView};
