@@ -80,8 +80,8 @@ body {
 
 .editzone {
 	background-color: whitesmoke;
-	width: -webkit-fill-available;
-	height: -webkit-fill-available;
+	width: 90%;
+	height: 90%;
 	margin: 1rem;
 	padding: 1rem;
 }

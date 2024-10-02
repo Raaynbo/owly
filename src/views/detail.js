@@ -2,7 +2,7 @@ import {Project} from "../js/projects.js";
 import {createCard} from "../js/components/card.js";
 import {renderApp} from "../index.js";
 
-const hidden_info = ["steps", "active", "startWipDate", "endWipDate", "session"]
+const hidden_info = ["steps", "active", "startWipDate", "endWipDate", "session", "note"]
 
 function detailView(app, object){
 	const main = document.createElement('div');
@@ -56,7 +56,7 @@ function detailView(app, object){
 		});
 	}else{
 		my_task.textContent = "we are here to work";
-		createWorktable(my_task)
+		createWorktable(my_task, object.task)
 		my_task.classList.add("worktable")
 
 	}
@@ -93,13 +93,32 @@ function createInfo(container, object){
 	}
 }
 
-function createWorktable(container){
+function createWorktable(container, task){
 	const buttonzone = document.createElement('div');
-	const editzone = document.createElement('textarea');
+	const editzone = document.createElement('div');
+	const textarea = document.createElement('textarea');
 	
 	editzone.classList.add("editzone");
 
+	console.log(task)
 	container.appendChild(editzone);
+	
+	editzone.textContent = task.note;
+	editzone.addEventListener("click", (e)=>{
+		console.log("click edit")
+		container.replaceChild(textarea, editzone);
+		textarea.classList.toggle("editzone");
+		editzone.classList.toggle("hidden");
+		textarea.value = task.note;
+	})
+	
+	textarea.addEventListener("mouseout", (e)=> {
+		container.replaceChild(editzone, textarea);
+		textarea.classList.toggle("editzone");
+		editzone.textContent = textarea.value;
+		task.setNote(textarea.value);
+		console.log(task)
+	})
 	
 }
 

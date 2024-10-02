@@ -7,10 +7,15 @@ class Project  {
 		this.state= finished;
 		this.favorite= fav;
 		this.steps = [];
+		this.note = "";
 	}
 
 	addSteps(step){
 		this.steps.push(step);	
+	}
+
+	setNote(value){
+		this.note = value;
 	}
 
 	

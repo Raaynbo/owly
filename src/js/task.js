@@ -10,6 +10,7 @@ class Task{
 		this.session = [];
 		this.active = false;
 		this.steps = [];
+		this.note = "";
 	}
 
 	startTask(){
@@ -51,6 +52,10 @@ class Task{
 
 	msToMinutes(ms) {
 		return Math.floor((ms / 1000 / 60));
+	}
+
+	setNote(value){
+		this.note = value;
 	}
 
 
