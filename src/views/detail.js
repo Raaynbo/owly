@@ -76,6 +76,18 @@ function detailView(app, object){
 			task: object.project
 		}
 		renderApp("detail", object)})
+	const list_el = document.querySelectorAll("li");
+	list_el.forEach((el) => { 
+	el.addEventListener("click",(e) => {
+			
+			el.itemInfo = {
+				project: object.project,
+				type: "task",
+				task: el.itemInfo.task
+			}
+			renderApp("detail", el.itemInfo)
+		});
+	});
 }
 //	addEventListener("click", (e) => {
 function createInfo(container, object){
