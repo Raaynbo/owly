@@ -90,6 +90,12 @@ body {
 	width: 2rem;
 	height: 2rem;
 	position: relative;
-	top: -5%;
-	left: 90%;
+}
+
+.info_project {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-weight: 800;
+	font-size: 1.5rem;
 }

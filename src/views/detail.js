@@ -98,6 +98,9 @@ function detailView(app, object){
 }
 //	addEventListener("click", (e) => {
 function createInfo(container, object){
+	const titleinfo = document.createElement('div');
+	titleinfo.classList.add("info_project")
+	container.appendChild(titleinfo);
 	for (const key in object){
 		const infodiv = document.createElement('div');
 
@@ -126,7 +129,12 @@ function createInfo(container, object){
 			
 				svg.appendChild(path);
 				infodiv.appendChild(svg);
-				container.prepend(infodiv);
+				titleinfo.appendChild(infodiv)
+				break;
+			case "name":
+				infodiv.textContent = object[key];
+				infodiv.classList.add("project_title")
+				titleinfo.appendChild(infodiv);
 				break;
 			default:
 				infodiv.textContent = key + " : " + object[key];
