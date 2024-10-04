@@ -85,3 +85,11 @@ body {
 	margin: 1rem;
 	padding: 1rem;
 }
+
+.favorite_off {
+	width: 2rem;
+	height: 2rem;
+	position: relative;
+	top: -5%;
+	left: 90%;
+}

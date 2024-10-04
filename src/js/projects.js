@@ -18,6 +18,10 @@ class Project  {
 		this.note = value;
 	}
 
+	toggleFav(){
+		this.favorite == true ? this.favorite = false : this.favorite = true;
+	}
+
 	
 }
 
