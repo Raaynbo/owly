@@ -96,7 +96,8 @@ function detailView(app, object){
 		});
 	});
 }
-//	addEventListener("click", (e) => {
+
+
 function createInfo(container, object){
 	const titleinfo = document.createElement('div');
 	titleinfo.classList.add("info_project")
@@ -152,12 +153,10 @@ function createWorktable(container, task){
 	
 	editzone.classList.add("editzone");
 
-	console.log(task)
 	container.appendChild(editzone);
 	
 	editzone.textContent = task.note;
 	editzone.addEventListener("click", (e)=>{
-		console.log("click edit")
 		container.replaceChild(textarea, editzone);
 		textarea.classList.toggle("editzone");
 		editzone.classList.toggle("hidden");
@@ -169,7 +168,6 @@ function createWorktable(container, task){
 		textarea.classList.toggle("editzone");
 		editzone.textContent = textarea.value;
 		task.setNote(textarea.value);
-		console.log(task)
 	})
 	
 }
