@@ -54,12 +54,10 @@ function detailView(app, object){
 		object.task.steps.forEach((task) => {
 			createCard(my_task,["list"],task, "task", object.project);
 		});
-	}else{
-		my_task.textContent = "we are here to work";
-		createWorktable(my_task, object.task)
-		my_task.classList.add("worktable")
-
 	}
+	createWorktable(my_task, object.task)
+	my_task.classList.add("worktable")
+
 	
 	home_btn.addEventListener("click",(e)=> {
 		renderApp("home");
