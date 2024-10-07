@@ -24,6 +24,7 @@ function detailView(app, object){
 	info_container.classList.add("info_container");
 	navbar.classList.add("navbar");
 	my_taskbox.classList.add("task_list");
+	my_task.classList.add("taskzone");
 	home_btn.textContent = "home"; 
 	project_container.classList.add("main_container");
 	project_container.classList.add("detail");

@@ -8,6 +8,7 @@ function introduction(user){
 	const target = user.projects[base_project_id].steps[0];
 	target.createSubtask();
 	target.createSubtask("my second subtask");
+	target.createSubtask("my third subtask");
 }
 
 
