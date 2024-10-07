@@ -11,6 +11,8 @@ function detailView(app, object){
 	const project_container = document.createElement('div');
 	const tree_container = document.createElement('div');
 	const my_task = document.createElement('div');
+	const my_taskbox = document.createElement('div');
+	const worktable = document.createElement('div');
 	const info_container = document.createElement('div');
 	const info_project = document.createElement('div');
 	const info_task = document.createElement('div');
@@ -21,7 +23,7 @@ function detailView(app, object){
 	main.classList.add("detail_main");
 	info_container.classList.add("info_container");
 	navbar.classList.add("navbar");
-	my_task.classList.add("task_list");
+	my_taskbox.classList.add("task_list");
 	home_btn.textContent = "home"; 
 	project_container.classList.add("main_container");
 	project_container.classList.add("detail");
@@ -41,7 +43,9 @@ function detailView(app, object){
 	main.appendChild(project_container);
 	main.appendChild(tree_container);
 	project_container.appendChild(info_container);
-	project_container.appendChild(my_task);
+	project_container.appendChild(my_taskbox);
+	my_taskbox.appendChild(my_task);
+	my_taskbox.appendChild(worktable);
 	
 	createInfo(info_project, object.project);
 	info_container.appendChild(info_project);
@@ -55,8 +59,8 @@ function detailView(app, object){
 			createCard(my_task,["list"],task, "task", object.project);
 		});
 	}
-	createWorktable(my_task, object.task)
-	my_task.classList.add("worktable")
+	createWorktable(worktable, object.task)
+	worktable.classList.add("worktable")
 
 	
 	home_btn.addEventListener("click",(e)=> {
@@ -98,7 +102,9 @@ function detailView(app, object){
 
 function createInfo(container, object){
 	const titleinfo = document.createElement('div');
-	titleinfo.classList.add("info_project")
+	const actioninfo = document.createElement('div');
+	titleinfo.classList.add("info_project");
+	actioninfo.classList.add("info_action");
 	container.appendChild(titleinfo);
 	for (const key in object){
 		const infodiv = document.createElement('div');
@@ -135,13 +141,19 @@ function createInfo(container, object){
 				infodiv.classList.add("project_title")
 				titleinfo.appendChild(infodiv);
 				break;
+			case "state":
+				object['state'] == 1 ? actioninfo.textContent = "Done": actioninfo.textContent = "To do";
+
+
 			default:
 				infodiv.textContent = key + " : " + object[key];
 				container.appendChild(infodiv);
 				break;
 		}
 		infodiv.id = key;
+
 	}
+	container.appendChild(actioninfo);
 }
 
 function createWorktable(container, task){
