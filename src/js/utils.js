@@ -9,6 +9,8 @@ function introduction(user){
 	target.createSubtask();
 	target.createSubtask("my second subtask");
 	target.createSubtask("my third subtask");
+	target.createSubtask("my fourth subtask");
+	target.createSubtask("my fifth subtask");
 }
 
 
