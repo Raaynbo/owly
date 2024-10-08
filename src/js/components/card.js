@@ -53,6 +53,7 @@ function createList(container, data){
 
 
 function createActionZone(container, data){
+
 	const actcontainer = document.createElement('div');
 	const action_1 = document.createElement('span');
 
@@ -60,6 +61,9 @@ function createActionZone(container, data){
 	action_1.classList.add("action");
 
 	action_1.textContent = "finish this task";
+	if (data.state == 2){
+		action_1.textContent = "Finished";
+	}
 
 	action_1.addEventListener("click", (e) => {
 		data.closeTask();

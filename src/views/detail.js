@@ -41,7 +41,6 @@ function detailView(app, object){
 
 	
 	main.appendChild(project_container);
-	main.appendChild(tree_container);
 	project_container.appendChild(info_container);
 	project_container.appendChild(my_taskbox);
 	my_taskbox.appendChild(my_task);
@@ -163,6 +162,7 @@ function createInfo(container, object){
 					actioninfo.textContent = "To do";
 				} else {
 					actioninfo.textContent = "Done";
+					container.classList.add("finished")
 				}
 			default:
 				infodiv.textContent = key + " : " + object[key];
@@ -181,10 +181,15 @@ function createWorktable(container, task){
 	const textarea = document.createElement('textarea');
 	
 	editzone.classList.add("editzone");
+	console.log(task.note =="")
+	editzone.textContent = task.note;
+	if (task.note == ""){
+		editzone.textContent = " You can take note here! double tap to write something !";
+		textarea.placeholder = " You can take note here! double tap to write something !";
+	}
 
 	container.appendChild(editzone);
 	
-	editzone.textContent = task.note;
 	editzone.addEventListener("click", (e)=>{
 		container.replaceChild(textarea, editzone);
 		textarea.classList.toggle("editzone");
