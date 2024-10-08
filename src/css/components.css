@@ -21,3 +21,8 @@
 	align-self: end;
 	justify-content: space-evenly;
 }
+
+.finished {
+	background-color: black;
+	color: gold;
+}

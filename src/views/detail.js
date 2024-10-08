@@ -18,7 +18,6 @@ function detailView(app, object){
 	const info_task = document.createElement('div');
 	
 
-	console.log(object.task)
 
 	main.classList.add("detail_main");
 	info_container.classList.add("info_container");
@@ -50,6 +49,7 @@ function detailView(app, object){
 	
 	createInfo(info_project, object.project);
 	info_container.appendChild(info_project);
+	console.log(object)
 
 	if ( object.project != object.task){
 		createInfo(info_task, object.task);
@@ -70,6 +70,7 @@ function detailView(app, object){
 	})	
 
 	my_task.addEventListener("click", (e)=>{
+		console.log("mytask")
 		if(e.target.classList.contains("card")){
 			renderApp("detail", e.target.itemInfo);
 		}
@@ -99,6 +100,18 @@ function detailView(app, object){
 			renderApp("detail", el.itemInfo)
 		});
 	});
+	const action_1 = document.querySelectorAll(".action")
+	action_1.forEach((action)=> {
+		action.addEventListener("click", (e) => {
+		console.log("action")
+		action.itemInfo = {
+			project:object.project,
+			type: "task",
+			task: object.task
+		}
+		renderApp("detail", action.itemInfo)
+	})
+	})
 }
 
 

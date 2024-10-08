@@ -19,7 +19,12 @@ function createCard(container, attribute=[], data, type, project){
 				break;
 		}
 	})
-	container.appendChild(card);
+	if (data.state == 2){
+		container.appendChild(card);
+		card.classList.add("finished");
+	}else{
+		container.appendChild(card)
+	}
 }
 
 function createList(container, data){
@@ -54,11 +59,11 @@ function createActionZone(container, data){
 	actcontainer.classList.add("action_zone");
 	action_1.classList.add("action");
 
-	action_1.textContent = "action";
+	action_1.textContent = "finish this task";
+
 	action_1.addEventListener("click", (e) => {
 		data.closeTask();
-	})
-
+	});
 	container.appendChild(actcontainer);
 	actcontainer.appendChild(action_1);
 }
