@@ -50,6 +50,7 @@ function detailView(app, object){
 	
 	createInfo(info_project, object.project);
 	info_container.appendChild(info_project);
+
 	if ( object.project != object.task){
 		createInfo(info_task, object.task);
 		info_container.appendChild(info_task);
@@ -57,7 +58,7 @@ function detailView(app, object){
 
 	if (object.task.steps.length != 0){
 		object.task.steps.forEach((task) => {
-			createCard(my_task,["list"],task, "task", object.project);
+			createCard(my_task,["list", "action"],task, "task", object.project);
 		});
 	}
 	createWorktable(worktable, object.task)
@@ -143,9 +144,13 @@ function createInfo(container, object){
 				titleinfo.appendChild(infodiv);
 				break;
 			case "state":
-				object['state'] == 1 ? actioninfo.textContent = "Done": actioninfo.textContent = "To do";
-
-
+				if (object['state'] == 1){
+					actioninfo.textContent = "In progress";
+				}else if(object['state'] == 0){ 
+					actioninfo.textContent = "To do";
+				} else {
+					actioninfo.textContent = "Done";
+				}
 			default:
 				infodiv.textContent = key + " : " + object[key];
 				container.appendChild(infodiv);

@@ -15,7 +15,7 @@ function createCard(container, attribute=[], data, type, project){
 				createList(card, data.steps);
 				break;
 			case "action":
-				createActionZone(card);
+				createActionZone(card, data);
 				break;
 		}
 	})
@@ -47,25 +47,20 @@ function createList(container, data){
 }
 
 
-function createActionZone(container){
+function createActionZone(container, data){
 	const actcontainer = document.createElement('div');
 	const action_1 = document.createElement('span');
-	const action_2 = document.createElement('span');
-	const action_3 = document.createElement('span');
 
 	actcontainer.classList.add("action_zone");
 	action_1.classList.add("action");
-	action_2.classList.add("action");
-	action_3.classList.add("action");
 
 	action_1.textContent = "action";
-	action_2.textContent = "action";
-	action_3.textContent = "action";
+	action_1.addEventListener("click", (e) => {
+		data.closeTask();
+	})
 
 	container.appendChild(actcontainer);
 	actcontainer.appendChild(action_1);
-	actcontainer.appendChild(action_2);
-	actcontainer.appendChild(action_3);
 }
 
 export {createCard};

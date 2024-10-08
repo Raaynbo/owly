@@ -41,7 +41,11 @@ class Task{
 	}
 
 	closeTask(){
-		console.log("YOU FINISHED A TASK CONGRATZ");
+		if (this.steps.length != 0){
+			this.steps.forEach((task) => {
+				task.closeTask()
+			})
+		}
 		this.state = 2;
 	}
 

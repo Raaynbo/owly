@@ -8,7 +8,7 @@ class User{
 		this.projectFocused = 0;
 	}
 
-	createNewProject(pname="Learn Owly", desc="Base project to introduce Owly",finished=false, fav=false)  {
+	createNewProject(pname="Learn Owly", desc="Base project to introduce Owly",finished=0, fav=false)  {
 		const newPjt = new Project(pname, desc, finished, fav);
 		this.projects.push(newPjt);
 	};
