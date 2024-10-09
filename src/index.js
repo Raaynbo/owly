@@ -11,6 +11,7 @@ const content = document.querySelector(".app");
 
 const user = new User("Raaynbo");
 
+
 const app = function (){
 
 	introduction(user);

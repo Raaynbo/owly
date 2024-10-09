@@ -1,6 +1,7 @@
 import {Project} from "../js/projects.js"; 
 import {createCard} from "../js/components/card.js";
 import {renderApp} from "../index.js";
+import {chronoApp} from "../js/components/chrono.js";
 
 const hidden_info = ["steps", "active", "startWipDate", "endWipDate", "session", "note"]
 
@@ -48,6 +49,7 @@ function detailView(app, object){
 	app.appendChild(main);
 	app.appendChild(navbar);
 
+	console.log(chronoApp);
 	
 	main.appendChild(project_container);
 	project_container.appendChild(info_container);
@@ -126,8 +128,13 @@ function detailView(app, object){
 			task: object.task
 		}
 		renderApp("detail", action.itemInfo)
+		})
 	})
-	})
+	info_start.addEventListener("click", (e) => chronoApp.start());
+	info_stop.addEventListener("click", (e) => chronoApp.stop());
+	info_session.addEventListener("click", (e) => {
+		console.log(chronoApp);
+	});
 }
 
 
