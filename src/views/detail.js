@@ -16,6 +16,12 @@ function detailView(app, object){
 	const info_container = document.createElement('div');
 	const info_project = document.createElement('div');
 	const info_task = document.createElement('div');
+	const info_start = document.createElement('div');
+	const info_stop = document.createElement('div');
+	const info_playlist = document.createElement('div');
+	const info_session = document.createElement('div');
+	const info_playlist_row = document.createElement('div');
+	
 	
 
 
@@ -30,6 +36,9 @@ function detailView(app, object){
 	project_container.classList.add("detail");
 	info_project.classList.add("card");
 	info_task.classList.add("card");
+	info_playlist.classList.add("playlist_card");
+	info_session.classList.add("playlist_card");
+	info_playlist_row.classList.add("row");
 	
 	tree_container.classList.add("side_container");
 	tree_container.classList.add("small");
@@ -48,12 +57,20 @@ function detailView(app, object){
 	
 	createInfo(info_project, object.project);
 	info_container.appendChild(info_project);
-	console.log(object)
 
 	if ( object.project != object.task){
 		createInfo(info_task, object.task);
 		info_container.appendChild(info_task);
 	}
+
+	info_start.textContent = "Start";
+	info_stop.textContent = "Stop";
+	info_session.textContent = "00:00:00";
+	info_playlist.appendChild(info_start);
+	info_playlist.appendChild(info_stop);
+	info_playlist_row.appendChild(info_playlist);
+	info_playlist_row.appendChild(info_session);
+	info_container.appendChild(info_playlist_row);
 
 	if (object.task.steps.length != 0){
 		object.task.steps.forEach((task) => {

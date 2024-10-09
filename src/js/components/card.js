@@ -56,7 +56,9 @@ function createActionZone(container, data){
 
 	const actcontainer = document.createElement('div');
 	const action_1 = document.createElement('span');
-
+	const play = document.createElement('div');
+	play.classList.add("icon");
+	play.textContent = "Play";
 	actcontainer.classList.add("action_zone");
 	action_1.classList.add("action");
 
@@ -70,6 +72,10 @@ function createActionZone(container, data){
 	});
 	container.appendChild(actcontainer);
 	actcontainer.appendChild(action_1);
+	actcontainer.appendChild(play);
+}
+
+function createPlaylistAction(container){
 }
 
 export {createCard};

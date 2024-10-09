@@ -15,6 +15,20 @@
 	background-color: white;
 }
 
+.playlist_card {
+	margin: 1rem;
+	padding: 1rem;
+	height: 5vh;
+	width: 20vw;
+	box-shadow: lightgray 0 0 0 1px;
+	border-radius: 0.5rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	background-color: white;
+}
+
 .action_zone {
 	display: flex;
 	width: 60%;
