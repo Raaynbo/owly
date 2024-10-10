@@ -11,3 +11,6 @@ timer doesnt work when you leave the page // async worker to make it work ??
 
 when finishing the timer it takes the project/task you are inside not the pjt/task used at launch
 
+
+need a button for creating new task and projects
+
