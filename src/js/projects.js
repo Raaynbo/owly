@@ -8,6 +8,7 @@ class Project  {
 		this.favorite= fav;
 		this.steps = [];
 		this.note = "";
+		this.duration = 0;
 	}
 
 	addSteps(step){
@@ -20,6 +21,10 @@ class Project  {
 
 	toggleFav(){
 		this.favorite == true ? this.favorite = false : this.favorite = true;
+	}
+	
+	setDuration(minutes){
+		this.duration = minutes;
 	}
 
 	

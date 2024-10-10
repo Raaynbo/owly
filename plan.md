@@ -1,4 +1,13 @@
 
 did home and detail page displaying all variables. 
 
-I need to create a popup when list is empty (no more task in it ) to display task info edit, a note taking system and a start button...
+updated details to display notezone + task, 
+
+tasks are now finishable
+
+A timer can be launched for any project
+
+timer doesnt work when you leave the page // async worker to make it work ??
+
+when finishing the timer it takes the project/task you are inside not the pjt/task used at launch
+

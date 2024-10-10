@@ -2,6 +2,7 @@ import {Project} from "../js/projects.js";
 import {createCard} from "../js/components/card.js";
 import {renderApp} from "../index.js";
 import {chronoApp} from "../js/components/chrono.js";
+import {hoursToMinutes} from "../js/utils.js"
 
 const hidden_info = ["steps", "active", "startWipDate", "endWipDate", "session", "note"]
 
@@ -39,6 +40,7 @@ function detailView(app, object){
 	info_task.classList.add("card");
 	info_playlist.classList.add("playlist_card");
 	info_session.classList.add("playlist_card");
+	info_session.classList.add("timer")
 	info_playlist_row.classList.add("row");
 	
 	tree_container.classList.add("side_container");
@@ -49,7 +51,6 @@ function detailView(app, object){
 	app.appendChild(main);
 	app.appendChild(navbar);
 
-	console.log(chronoApp);
 	
 	main.appendChild(project_container);
 	project_container.appendChild(info_container);
@@ -88,7 +89,6 @@ function detailView(app, object){
 	})	
 
 	my_task.addEventListener("click", (e)=>{
-		console.log("mytask")
 		if(e.target.classList.contains("card")){
 			renderApp("detail", e.target.itemInfo);
 		}
@@ -121,7 +121,6 @@ function detailView(app, object){
 	const action_1 = document.querySelectorAll(".action")
 	action_1.forEach((action)=> {
 		action.addEventListener("click", (e) => {
-		console.log("action")
 		action.itemInfo = {
 			project:object.project,
 			type: "task",
@@ -131,7 +130,13 @@ function detailView(app, object){
 		})
 	})
 	info_start.addEventListener("click", (e) => chronoApp.start());
-	info_stop.addEventListener("click", (e) => chronoApp.stop());
+	info_stop.addEventListener("click", (e) => {
+		let  minutes = chronoApp.stop()
+		console.log(minutes)
+
+		object.project.setDuration(minutes)
+		renderApp("detail", object)
+	});
 	info_session.addEventListener("click", (e) => {
 		console.log(chronoApp);
 	});
@@ -205,7 +210,6 @@ function createWorktable(container, task){
 	const textarea = document.createElement('textarea');
 	
 	editzone.classList.add("editzone");
-	console.log(task.note =="")
 	editzone.textContent = task.note;
 	if (task.note == ""){
 		editzone.textContent = " You can take note here! double tap to write something !";

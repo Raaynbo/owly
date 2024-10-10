@@ -1,3 +1,5 @@
+import {msToMinutes} from "../js/utils.js";
+
 class Task{
 	constructor (tname = "my first task", desc = "Learn about how we help you handle your task", drtn=0, cDate = "2024-09-27"){
 		this.name = tname;	
@@ -30,7 +32,7 @@ class Task{
 			return;
 		}
 		console.log("terminating this task");
-		this.duration += this.msToMinutes(Date.now()-this.startWipDate)
+		this.duration += msToMinutes(Date.now()-this.startWipDate)
 		this.endWipDate = Date.now(); 
 		this.session.push([this.startWipDate, this.endWipDate]);
 		this.state = 1;
@@ -54,9 +56,6 @@ class Task{
 		this.steps.push(nTask);
 	}
 
-	msToMinutes(ms) {
-		return Math.floor((ms / 1000 / 60));
-	}
 
 	setNote(value){
 		this.note = value;

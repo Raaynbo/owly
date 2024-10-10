@@ -25,8 +25,18 @@ function startATask(user, pid){
 }
 
 function updateTimerUI(time){
-	console.log(time)
+	const timer = document.querySelector(".timer");
+	timer.textContent = time;
+}
+
+function hoursToMinutes(h){
+	return h* 60;
+}
+
+function msToMinutes(ms) {
+		return Math.floor((ms / 1000 / 60));
 }
 
 
-export {introduction, startATask};
+
+export {introduction, startATask, updateTimerUI, hoursToMinutes, msToMinutes};
