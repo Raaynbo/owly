@@ -19,9 +19,6 @@ class Chrono {
 			seconds = 0;
 			minutes++;
 		}
-		console.log(`milli ${milliseconds}`)
-		console.log(`sec ${seconds}`)
-		console.log(`min ${minutes}`)
 		const time = minutes + ":" + seconds;
 		console.log(time);
 	}
