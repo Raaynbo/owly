@@ -24,5 +24,9 @@ function startATask(user, pid){
 	
 }
 
+function updateTimerUI(time){
+	console.log(time)
+}
+
 
 export {introduction, startATask};
