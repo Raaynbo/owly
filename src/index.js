@@ -14,7 +14,7 @@ const action_btn = document.querySelector(".action_button");
 const user = new User("Raaynbo");
 
 
-action_btn.addEventListener("mouseover", (e) => {
+action_btn.addEventListener("click", (e) => {
 		console.log("over")
 		actionView();	
 	})
