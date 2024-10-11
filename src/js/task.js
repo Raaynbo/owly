@@ -32,7 +32,7 @@ class Task{
 			return;
 		}
 		console.log("terminating this task");
-		this.duration += msToMinutes(Date.now()-this.startWipDate)
+		this.duration += chronoApp.msToMinutes(Date.now()-this.startWipDate)
 		this.endWipDate = Date.now(); 
 		this.session.push([this.startWipDate, this.endWipDate]);
 		this.state = 1;
