@@ -29,14 +29,7 @@ function updateTimerUI(time){
 	timer.textContent = time;
 }
 
-function hoursToMinutes(h){
-	return h* 60;
-}
-
-function msToMinutes(ms) {
-		return Math.floor((ms / 1000 / 60));
-}
 
 
 
-export {introduction, startATask, updateTimerUI, hoursToMinutes, msToMinutes};
+export {introduction, startATask, updateTimerUI };

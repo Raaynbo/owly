@@ -1,4 +1,4 @@
-import {updateTimerUI, hoursToMinutes, msToMinutes} from "../utils.js"
+import {updateTimerUI} from "../utils.js"
 console.log("chrono.js");
 
 let hours = 0;
@@ -30,7 +30,6 @@ class Chrono {
 		updateTimerUI(time)
 	}
 	start(){
-		this.timerID = setInterval(this.chronometre, 10);
 		this.startDate = new Date();
 		console.log(this.startDate)
 	}
@@ -38,16 +37,18 @@ class Chrono {
 	stop(){
 		clearInterval(this.timerID);
 		let endDate = new Date();
-		let finalTime = msToMinutes(endDate - this.startDate);
-		minutes = hoursToMinutes(hours);
+		let finalTime = this.msToMinutes(endDate - this.startDate);
 		this.reset()
 		return finalTime;
 	}
 	reset(){
-		clearInterval(this.timerID);
 		minutes = 0;
 		seconds = 0;
 		milliseconds = 0;
+	}
+
+	msToMinutes(ms) {
+			return Math.floor((ms / 1000 / 60));
 	}
 }
 

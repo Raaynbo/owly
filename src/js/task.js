@@ -1,4 +1,4 @@
-import {msToMinutes} from "../js/utils.js";
+import {chronoApp} from "../js/components/chrono.js";
 
 class Task{
 	constructor (tname = "my first task", desc = "Learn about how we help you handle your task", drtn=0, cDate = "2024-09-27"){

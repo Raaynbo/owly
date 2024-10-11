@@ -2,7 +2,6 @@ import {Project} from "../js/projects.js";
 import {createCard} from "../js/components/card.js";
 import {renderApp} from "../index.js";
 import {chronoApp} from "../js/components/chrono.js";
-import {hoursToMinutes} from "../js/utils.js"
 
 const hidden_info = ["steps", "active", "startWipDate", "endWipDate", "session", "note"]
 
