@@ -4,13 +4,20 @@ import {introduction, startATask} from "./js/utils.js";
 import {User} from "./js/user.js";
 import {homeView} from "./views/home.js";
 import {detailView} from "./views/detail.js";
+import {actionView} from "./views/action_button.js";
 
 
 
 const content = document.querySelector(".app");
+const action_btn = document.querySelector(".action_button");
 
 const user = new User("Raaynbo");
 
+
+action_btn.addEventListener("mouseover", (e) => {
+		console.log("over")
+		actionView();	
+	})
 
 const app = function (){
 

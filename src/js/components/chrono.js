@@ -1,5 +1,4 @@
 import {updateTimerUI} from "../utils.js"
-console.log("chrono.js");
 
 let hours = 0;
 let minutes = 0;
