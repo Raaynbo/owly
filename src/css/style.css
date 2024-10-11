@@ -119,3 +119,24 @@ body {
 	display: flex;
 	flex-direction: column;
 }
+
+.action_button {
+	position: absolute;
+	bottom: 4rem;
+	left: 1rem;
+	border-radius: 50%;
+	border: 0.1rem solid gold;
+	background-color: white;
+	box-shadow: #00000030 0 0 4px 2px;
+	width: 4rem;
+	height: 4rem;
+	font-size: 4rem;
+}
+
+.action_button_content {
+	box-sizing: content-box;
+	margin-top: -0.25rem;
+	padding-left: 20%;
+	padding-bottom: 20%;
+	font-weight: 800;
+}
