@@ -2,6 +2,8 @@ import {renderApp} from "../../index.js"
 
 console.log("popup js");
 
+let currTreeSelector;
+const tree = [];
 
 // reuse card arguments system where a list is passed with all the elements needed inside the popup
 //
@@ -67,6 +69,9 @@ function createForm(container, user){
 	const inputsubmit = document.createElement('input');
 	const inputList = [];
 
+	const treeSelector = document.createElement('div');
+	createTreeSelector(treeSelector, user);
+
 	labelname.textContent = "Name \t";
 	labeldesc.textContent = "Description \t";
 	labeldate.textContent = "Due Date \t";
@@ -106,6 +111,7 @@ function createForm(container, user){
 	labeldate.appendChild(inputdate);
 	labelnote.appendChild(inputnote);
 	labelpriority.appendChild(inputpriority);
+	form.appendChild(treeSelector)
 	form.appendChild(labelname);
 	form.appendChild(labeldesc);
 	form.appendChild(labeldate);
@@ -113,6 +119,84 @@ function createForm(container, user){
 	form.appendChild(labelnote);
 	form.appendChild(inputsubmit);
 	container.appendChild(form);
+}
+
+
+function createTreeSelector(container, user){
+	while (container.firstChild){
+		container.removeChild(container.lastChild)
+	}
+	const path = document.createElement('div');
+	const btnzone = document.createElement('div');
+	const rootbtn = document.createElement('div');
+	const backbtn = document.createElement('div');
+
+	const treeviz = document.createElement('div');
+
+	rootbtn.textContent = "root";
+	backbtn.textContent = "back";
+
+	console.log(currTreeSelector);
+	rootbtn.addEventListener("click", (e)=>{
+		currTreeSelector = undefined;
+		while(tree.length){
+			tree.pop();
+		}
+		createTreeSelector(container, user);
+	})
+
+	backbtn.addEventListener("click", (e) =>{
+		if (currTreeSelector == undefined){
+			return false;
+		}
+		tree.pop();
+		let temp = user.projects;
+		if (tree.length ==0 ){
+			currTreeSelector = undefined;
+			createTreeSelector(container, user)
+		}else{
+			console.log("a"+tree.length)
+			temp = user.projects[tree[0]];
+			for (let i = 1; i <= tree.length-1; i++){
+				temp = temp.steps[tree[i]];	
+			}
+			console.log(tree);
+			currTreeSelector = temp;
+		}
+		createTreeSelector(container, user);
+
+	})
+
+	if (currTreeSelector == undefined){
+		user.projects.forEach((child)=>{
+			const row = document.createElement('div');
+			row.textContent = child.name;
+			row.addEventListener("dblclick", (e)=>{
+				currTreeSelector = child;
+				tree.push(user.projects.findIndex((el) => {return el == currTreeSelector}));
+				createTreeSelector(container, user);
+			})
+			treeviz.appendChild(row);
+		})
+	}else{
+		currTreeSelector.steps.forEach((child)=>{
+			const row = document.createElement('div');
+			row.textContent = child.name;
+			row.addEventListener("dblclick", (e)=>{
+				tree.push(currTreeSelector.steps.findIndex((el) => {return el == child}));
+				currTreeSelector = child;
+				createTreeSelector(container, user);
+			})
+			treeviz.appendChild(row);
+		})
+	}
+	console.log(tree);
+	btnzone.appendChild(rootbtn);
+	btnzone.appendChild(backbtn);
+	container.appendChild(btnzone);
+	container.appendChild(treeviz);
+
+	
 }
 
 function verifyInput(list){
