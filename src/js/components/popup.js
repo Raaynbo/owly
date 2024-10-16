@@ -58,6 +58,8 @@ function createForm(container, user){
 	const labeldate = document.createElement('label');
 	const labeldesc = document.createElement('label');
 	const labelpriority = document.createElement('label');
+	const labelnote = document.createElement('label');
+	const inputnote = document.createElement('input');
 	const inputpriority = document.createElement('input');
 	const inputname = document.createElement('input');
 	const inputdesc = document.createElement('input');
@@ -69,6 +71,8 @@ function createForm(container, user){
 	labeldesc.textContent = "Description \t";
 	labeldate.textContent = "Due Date \t";
 	labelpriority.textContent = "Priority \t";
+	labelnote.textContent = "Note \t";
+	inputnote.type = "text";
 	inputname.type = "text";
 	inputdesc.type = "textarea";
 	inputdate.type = "date";
@@ -87,7 +91,7 @@ function createForm(container, user){
 		if(!verifyInput(inputList)){
 			return false;	
 		}
-		user.createNewProject(inputname.value, inputdesc.value)
+		user.createNewProject(inputname.value, inputdesc.value, inputnote.value)
 		const obj = {
 			project: user.projects[user.projects.length-1],
 			task:user.projects[user.projects.length-1]
@@ -100,11 +104,13 @@ function createForm(container, user){
 	labelname.appendChild(inputname);
 	labeldesc.appendChild(inputdesc);
 	labeldate.appendChild(inputdate);
+	labelnote.appendChild(inputnote);
 	labelpriority.appendChild(inputpriority);
 	form.appendChild(labelname);
 	form.appendChild(labeldesc);
 	form.appendChild(labeldate);
 	form.appendChild(labelpriority);
+	form.appendChild(labelnote);
 	form.appendChild(inputsubmit);
 	container.appendChild(form);
 }
