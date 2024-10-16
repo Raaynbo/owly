@@ -1,16 +1,33 @@
 
-did home and detail page displaying all variables. 
-
-updated details to display notezone + task, 
-
-tasks are now finishable
-
-A timer can be launched for any project
-
-timer doesnt work when you leave the page // async worker to make it work ??
-
-when finishing the timer it takes the project/task you are inside not the pjt/task used at launch
+I need to do a tree selector and an option to create task inside a project
 
 
-need a button for creating new task and projects
+tree selector 
 
+div treeviz
+div actionbtn
+div path
+
+actual = object(project/task)
+array tree 
+    tree.push(e.target.value);
+
+div treeviz
+    actual.steps.forEach(child)
+    display each child name, 1/row
+    each child has onlclick method to update treeselector
+    {
+        tree.push(clickedIndex);
+        actual = selected child
+        rendertree selector
+    }
+
+
+div actionbtn
+    pjt directory
+    back
+    
+
+
+div path display 
+        path.textContent += tree[i].name;
