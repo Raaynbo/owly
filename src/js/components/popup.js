@@ -133,6 +133,7 @@ function closeModal(){
 
 	modal.remove();
 	overlay.remove();
+	renderApp("home")
 }
 
 export {createModal};

@@ -10,6 +10,11 @@ import {actionView} from "./views/action_button.js";
 
 const content = document.querySelector(".app");
 const action_btn = document.querySelector(".action_button");
+const appInfo = {
+	page:"home",
+	project:"",
+	task: ""
+}
 
 const user = new User("Raaynbo");
 
@@ -17,6 +22,7 @@ const user = new User("Raaynbo");
 action_btn.addEventListener("click", (e) => {
 		console.log("over")
 		actionView(user);	
+		appInfo.page = "form";
 	})
 
 const app = function (){
@@ -37,14 +43,20 @@ const app = function (){
 
 function renderApp(page, object){
 	clearApp();
+	
 	switch(page){
 		case "home":
 			homeView(content, user);
+			appInfo.page = "home";
 			break;
 		case "detail":
 			detailView(content, object);
+			appInfo.page = "detail";
+			appInfo.project = object.project;
+			appInfo.task = object.task;
 			break;
 	}
+	console.log(appInfo)
 }
 
 
