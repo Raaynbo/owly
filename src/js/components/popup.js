@@ -136,12 +136,16 @@ function createTreeSelector(container, user){
 	rootbtn.textContent = "root";
 	backbtn.textContent = "back";
 
-	console.log(currTreeSelector);
+	let dir = user.projects[tree[0]];
+	for (let i=1 ; i<=tree.length-1;i++){
+		
+	}
 	rootbtn.addEventListener("click", (e)=>{
 		currTreeSelector = undefined;
 		while(tree.length){
 			tree.pop();
 		}
+		path.textContent = "/";
 		createTreeSelector(container, user);
 	})
 
@@ -174,17 +178,27 @@ function createTreeSelector(container, user){
 			row.addEventListener("dblclick", (e)=>{
 				currTreeSelector = child;
 				tree.push(user.projects.findIndex((el) => {return el == currTreeSelector}));
+				path.textContent = currTreeSelector.name;
+				console.log(currTreeSelector.name)
 				createTreeSelector(container, user);
 			})
 			treeviz.appendChild(row);
 		})
 	}else{
+		let temp = user.projects[tree[0]];
+		path.textContent = temp.name+"/";
+		for(let i =1 ; i<= tree.length-1 ;i++){
+			temp = temp.steps[tree[i]];
+			path.textContent += temp.name + "/";
+		}
 		currTreeSelector.steps.forEach((child)=>{
 			const row = document.createElement('div');
 			row.textContent = child.name;
 			row.addEventListener("dblclick", (e)=>{
 				tree.push(currTreeSelector.steps.findIndex((el) => {return el == child}));
 				currTreeSelector = child;
+				path.textContent =  currTreeSelector.name;
+				console.log(currTreeSelector.name)
 				createTreeSelector(container, user);
 			})
 			treeviz.appendChild(row);
@@ -193,6 +207,7 @@ function createTreeSelector(container, user){
 	console.log(tree);
 	btnzone.appendChild(rootbtn);
 	btnzone.appendChild(backbtn);
+	container.appendChild(path);
 	container.appendChild(btnzone);
 	container.appendChild(treeviz);
 
