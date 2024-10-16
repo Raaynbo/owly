@@ -16,7 +16,7 @@ const user = new User("Raaynbo");
 
 action_btn.addEventListener("click", (e) => {
 		console.log("over")
-		actionView();	
+		actionView(user);	
 	})
 
 const app = function (){

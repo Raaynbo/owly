@@ -1,3 +1,5 @@
+import {renderApp} from "../../index.js"
+
 console.log("popup js");
 
 
@@ -9,7 +11,7 @@ console.log("popup js");
 
 
 //args = attributes, title,object 
-function createModal(title="OWLY GOT INFOS FOR YOU", attribute=[]){
+function createModal(title="OWLY GOT INFOS FOR YOU", attribute=[], user){
 	const modal = document.createElement("div");
 	modal.classList.add("modal");
 
@@ -34,7 +36,7 @@ function createModal(title="OWLY GOT INFOS FOR YOU", attribute=[]){
 		switch(attr){
 			case "form":
 				console.log("form")
-				createForm(modal_content)
+				createForm(modal_content, user)
 				break;
 			case "action":
 				console.log("action")
@@ -50,21 +52,25 @@ function createModal(title="OWLY GOT INFOS FOR YOU", attribute=[]){
 }
 
 
-function createForm(container){
+function createForm(container, user){
 	const form = document.createElement("form");
 	const labelname = document.createElement('label');
 	const labeldate = document.createElement('label');
+	const labeldesc = document.createElement('label');
 	const labelpriority = document.createElement('label');
 	const inputpriority = document.createElement('input');
 	const inputname = document.createElement('input');
+	const inputdesc = document.createElement('input');
 	const inputdate = document.createElement('input');
 	const inputsubmit = document.createElement('input');
 	const inputList = [];
 
 	labelname.textContent = "Name \t";
+	labeldesc.textContent = "Description \t";
 	labeldate.textContent = "Due Date \t";
 	labelpriority.textContent = "Priority \t";
 	inputname.type = "text";
+	inputdesc.type = "textarea";
 	inputdate.type = "date";
 	inputpriority.type = "range";
 	inputsubmit.type = "button";
@@ -73,6 +79,7 @@ function createForm(container){
 	inputpriority.max = 3;
 	
 	inputList.push(inputname);
+	inputList.push(inputdesc);
 	inputList.push(inputdate);
 	inputList.push(inputpriority);
 	
@@ -80,14 +87,22 @@ function createForm(container){
 		if(!verifyInput(inputList)){
 			return false;	
 		}
-		// user.createProject()
+		user.createNewProject(inputname.value, inputdesc.value)
+		const obj = {
+			project: user.projects[user.projects.length-1],
+			task:user.projects[user.projects.length-1]
+		}
+		renderApp("home")
+		closeModal();
 
 	})
 	
 	labelname.appendChild(inputname);
+	labeldesc.appendChild(inputdesc);
 	labeldate.appendChild(inputdate);
 	labelpriority.appendChild(inputpriority);
 	form.appendChild(labelname);
+	form.appendChild(labeldesc);
 	form.appendChild(labeldate);
 	form.appendChild(labelpriority);
 	form.appendChild(inputsubmit);

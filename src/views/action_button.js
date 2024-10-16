@@ -1,9 +1,10 @@
 import {createModal} from "../js/components/popup.js";
 
 
-function actionView(){
+function actionView(user){
 	console.log("soon displaying things")
-	createModal("title", ["form"]);
+	createModal("Create a new project", ["form"], user);
+	
 
 }
 
