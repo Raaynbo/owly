@@ -140,3 +140,27 @@ body {
 	padding-bottom: 20%;
 	font-weight: 800;
 }
+
+.bar {
+	display: flex;
+	width: 100%;
+	margin-right: 2rem;
+}
+
+.btn_form {
+	background-color: lightgray;
+	padding: 2rem;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.selected {
+	filter: brightness(85%);
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}

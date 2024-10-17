@@ -28,7 +28,6 @@ function createModal(title="OWLY GOT INFOS FOR YOU", attribute=[], user){
 
 	const modal_content = document.createElement('div');
 	modal_content.classList.add("modal_content");
-	modal_content.textContent = "content";
 
 
 	const overlay = document.createElement("div");
@@ -55,6 +54,9 @@ function createModal(title="OWLY GOT INFOS FOR YOU", attribute=[], user){
 
 
 function createForm(container, user){
+	const type_zone = document.createElement('div');
+	const pjt_btn = document.createElement('div');
+	const task_btn = document.createElement('div');
 	const form = document.createElement("form");
 	const labelname = document.createElement('label');
 	const labeldate = document.createElement('label');
@@ -86,12 +88,34 @@ function createForm(container, user){
 	inputsubmit.value = "button";
 	inputpriority.min = 0;
 	inputpriority.max = 3;
+
+	pjt_btn.textContent = "project";
+	pjt_btn.classList.add("btn_form");
+	task_btn.classList.add("btn_form");
+	form.classList.add("form");
+	type_zone.classList.add("bar");
+	
+	task_btn.textContent = "task";
+
+	type_zone.appendChild(pjt_btn);
+	type_zone.appendChild(task_btn);
 	
 	inputList.push(inputname);
 	inputList.push(inputdesc);
 	inputList.push(inputdate);
 	inputList.push(inputpriority);
 	
+	task_btn.addEventListener("click", (e)=>{
+		form.appendChild(treeSelector);
+		task_btn.classList.add("selected");
+		pjt_btn.classList.remove("selected");
+	});
+	pjt_btn.addEventListener("click", (e)=>{
+		form.removeChild(treeSelector);
+		pjt_btn.classList.add("selected");
+		task_btn.classList.remove("selected");
+	});
+
 	inputsubmit.addEventListener("click", (e)=>{
 		if(!verifyInput(inputList)){
 			return false;	
@@ -111,7 +135,7 @@ function createForm(container, user){
 	labeldate.appendChild(inputdate);
 	labelnote.appendChild(inputnote);
 	labelpriority.appendChild(inputpriority);
-	form.appendChild(treeSelector)
+	form.appendChild(type_zone);
 	form.appendChild(labelname);
 	form.appendChild(labeldesc);
 	form.appendChild(labeldate);
