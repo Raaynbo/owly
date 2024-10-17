@@ -13,7 +13,7 @@ class User{
 		this.projects.push(newPjt);
 	};
 
-	createNewTask(id, name="my first task", desc = "learn more about task management with Owly", duration = 0, creationDate = new Date()){
+	createNewTask( name="my first task", desc = "learn more about task management with Owly", duration = 0, creationDate = new Date()){
 		const newTask = new Task(name, desc, duration, creationDate);
 		this.projects[this.projectFocused].addSteps(newTask);
 	};

@@ -30,7 +30,7 @@ const app = function (){
 	introduction(user);
 
 
-	user.createNewTask(0, "My task")
+	user.createNewTask( "My task")
 	
 	user.createNewProject("Owly 2")
 

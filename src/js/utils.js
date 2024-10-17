@@ -4,7 +4,7 @@ function introduction(user){
 	user.createNewProject();
 	const base_project_id = 0;
 	user.setProjectFocused(0);
-	user.createNewTask(base_project_id);
+	user.createNewTask("MY fantastic first task");
 	const target = user.projects[base_project_id].steps[0];
 	target.createSubtask();
 	target.createSubtask("my second subtask");

@@ -119,13 +119,35 @@ function createForm(container, user){
 	});
 
 	inputsubmit.addEventListener("click", (e)=>{
+		let obj = {
+			project: "project",
+			task:"task"
+		}
 		if(!verifyInput(inputList)){
 			return false;	
 		}
-		user.createNewProject(inputname.value, inputdesc.value, inputnote.value)
-		const obj = {
-			project: user.projects[user.projects.length-1],
-			task:user.projects[user.projects.length-1]
+		if (pjt_btn.classList.contains("selected")){
+			user.createNewProject(inputname.value, inputdesc.value, inputnote.value)
+			obj = {
+				project: user.projects[user.projects.length-1],
+				task:user.projects[user.projects.length-1]
+			}
+		}else{
+			if (currTreeSelector == undefined){
+				console.log("please select a project or a task first in the tree Viz")
+				return false;
+			}
+			console.log(currTreeSelector);
+			if (tree.length == 1){
+				user.setProjectFocused(user.projects.findIndex((pjt)=> {return pjt==currTreeSelector}));
+				user.createNewTask(inputname.value, inputdesc.value);
+			}else{
+				currTreeSelector.createSubtask(inputname.value, inputdesc.value);
+			}
+			obj = {
+				project:user.projects[tree[0]],
+				task:currTreeSelector
+			}
 		}
 		renderApp("home")
 		closeModal();
