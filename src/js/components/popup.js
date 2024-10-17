@@ -111,7 +111,9 @@ function createForm(container, user){
 		pjt_btn.classList.remove("selected");
 	});
 	pjt_btn.addEventListener("click", (e)=>{
-		form.removeChild(treeSelector);
+		if (Array.from(form.childNodes).find(node => node.isEqualNode(treeSelector))){
+			form.removeChild(treeSelector);
+		}
 		pjt_btn.classList.add("selected");
 		task_btn.classList.remove("selected");
 	});
