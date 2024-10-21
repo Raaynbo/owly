@@ -1,4 +1,25 @@
 import {chronoApp} from "../js/components/chrono.js";
+import {addArray, getArray} from "./components/storage.js";
+
+let taskList = JSON.parse(getArray("taskList")); 
+let lastId;
+ if (getArray("taskList") == null){
+	console.log("no task list")
+	lastId = 0
+	taskList = new Array(0)
+	addArray("taskList", taskList);
+	
+	
+ }else{
+	taskList = JSON.parse(getArray('taskList'));
+	console.log(taskList)
+	if (taskList == ""){
+		taskList = []
+	}	
+	taskList.length == 0? lastId = 0 : lastId = taskList.length-1;
+ }
+ 
+
 
 class Task{
 	constructor (tname = "my first task", desc = "Learn about how we help you handle your task", drtn=0, cDate = "2024-09-27"){
@@ -7,12 +28,16 @@ class Task{
 		this.duration = drtn;
 		this.creationDate = cDate;
 		this.startWipDate;
-		this.endWipDate;
 		this.state = 0;	
 		this.session = [];
 		this.active = false;
 		this.steps = [];
 		this.note = "";
+		this.id = lastId;
+		lastId++;
+		taskList.push(JSON.stringify(this))
+		addArray("taskList", taskList)
+		console.log(this)
 	}
 
 	startTask(){
@@ -33,12 +58,11 @@ class Task{
 		}
 		console.log("terminating this task");
 		this.duration += chronoApp.msToMinutes(Date.now()-this.startWipDate)
-		this.endWipDate = Date.now(); 
-		this.session.push([this.startWipDate, this.endWipDate]);
+		let endWipDate = Date.now(); 
+		this.session.push([this.startWipDate, endWipDate]);
 		this.state = 1;
 		this.active = false;
 		this.startWipDate = 0;
-		this.endWipDate = 0;
 		
 	}
 
@@ -53,7 +77,7 @@ class Task{
 
 	createSubtask(name="my first sub task", desc = "learn more about task management with Owly", duration = 0, creationDate = new Date()){
 		const nTask = new Task(name, desc, duration, creationDate);
-		this.steps.push(nTask);
+		this.steps.push(nTask.id);
 	}
 
 

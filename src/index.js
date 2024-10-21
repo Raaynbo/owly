@@ -5,6 +5,7 @@ import {User} from "./js/user.js";
 import {homeView} from "./views/home.js";
 import {detailView} from "./views/detail.js";
 import {actionView} from "./views/action_button.js";
+import {localStore} from "./js/components/storage.js";
 
 
 
@@ -26,6 +27,7 @@ action_btn.addEventListener("click", (e) => {
 	})
 
 const app = function (){
+	localStore();
 
 	introduction(user);
 
