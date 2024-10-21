@@ -27,35 +27,27 @@ action_btn.addEventListener("click", (e) => {
 	})
 
 const app = function (){
-	localStore();
+	if (localStore()){
+		console.log("introduction")
+		introduction(user);
+	}else{
+		user.loadTask()
+	}
 
-	introduction(user);
+	user.page="home";
 
-
-	user.createNewTask( "My task")
-	
-	user.createNewProject("Owly 2")
-
-	renderApp("home");
-	startATask(user, user.projectFocused);
-
-
-	
+	renderApp(user);
 }
 
-function renderApp(page, object){
+function renderApp(user){
 	clearApp();
 	
-	switch(page){
+	switch(user.page){
 		case "home":
 			homeView(content, user);
-			appInfo.page = "home";
 			break;
 		case "detail":
-			detailView(content, object);
-			appInfo.page = "detail";
-			appInfo.project = object.project;
-			appInfo.task = object.task;
+			detailView(content, user);
 			break;
 	}
 	console.log(appInfo)

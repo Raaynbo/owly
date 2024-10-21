@@ -1,12 +1,19 @@
 
 
 function localStore(){
-	console.log(localStorage)
-	if(!localStorage.getItem('bgcolor')) {
-		populateStorage();
-	}else {
-		console.log(localStorage['bgcolor'])
-	} 
+	let taskList = getObject("taskList") ;
+	let lastId;
+	 if (taskList == ""){
+		console.log("no task list")
+		lastId = 0
+		return true;	
+		
+	 }else{
+		taskList = getObject("taskList");
+		console.log(taskList) 
+		taskList.length == 0? lastId = 0 : lastId = taskList.length-1;
+		return false;
+	 }
 	
 
 }
@@ -16,7 +23,7 @@ function addDataObject(objname, obj){
 }
 
 function getObject(objname){
-	return JSON.parse(localStorage.getItem(objname));
+	return JSON.parse(localStorage.getItem(objname)||"[]");
 }
 
 function addArray(name="array", obj){

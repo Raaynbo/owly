@@ -1,27 +1,32 @@
 import {Task} from "./task.js";
 import {Project} from "./projects.js";
+import {getObject, addDataObject} from "./components/storage.js";
 
 class User{
 	constructor(input_name){
 		this.userName = input_name;
-		this.projects = [];
-		this.projectFocused = 0;
+		this.tasks = [];
+		this.focus = false;
+		this.focusId = 0;
+		this.page = "home";
 	}
 
-	createNewProject(pname="Learn Owly", desc="Base project to introduce Owly",note="",finished=0, fav=false)  {
-		const newPjt = new Project(pname, desc,note, finished, fav);
-		this.projects.push(newPjt);
-	};
+	createTask(name, desc){
+		const task = new Task(name, desc);
+		this.tasks.push(task);
+	}
 
-	createNewTask( name="my first task", desc = "learn more about task management with Owly", duration = 0, creationDate = new Date()){
-		const newTask = new Task(name, desc, duration, creationDate);
-		this.projects[this.projectFocused].addSteps(newTask);
-	};
+	loadTask(){
+		let tl = getObject('taskList');		
+		for (let i = 0 ; i <= tl.length-1; i++){
+			this.tasks.push(tl[i]);
+		}
+		console.log(this.tasks);
+	}
 
-	setProjectFocused(pid){
-		this.projectFocused = pid;
-	};
-	
+	save(){
+		addDataObject('taskList', this.tasks)
+	}
 }
 
 

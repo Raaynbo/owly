@@ -1,69 +1,42 @@
 import {chronoApp} from "../js/components/chrono.js";
-import {addArray, getArray} from "./components/storage.js";
+import {addDataObject, getObject, addArray, getArray} from "./components/storage.js";
 
-let taskList = JSON.parse(getArray("taskList")); 
+let taskList = getObject("taskList") ;
 let lastId;
- if (getArray("taskList") == null){
-	console.log("no task list")
+ if (taskList == ""){
 	lastId = 0
-	taskList = new Array(0)
-	addArray("taskList", taskList);
 	
 	
  }else{
-	taskList = JSON.parse(getArray('taskList'));
-	console.log(taskList)
-	if (taskList == ""){
-		taskList = []
-	}	
+	taskList = getObject("taskList");
 	taskList.length == 0? lastId = 0 : lastId = taskList.length-1;
  }
  
 
 
 class Task{
-	constructor (tname = "my first task", desc = "Learn about how we help you handle your task", drtn=0, cDate = "2024-09-27"){
+	constructor (tname = "my first task", desc = "Learn about how we help you handle your task", drtn=0, cDate = "2024-09-27", isSub=false, pid=-1){
 		this.name = tname;	
 		this.description = desc;
 		this.duration = drtn;
 		this.creationDate = cDate;
 		this.startWipDate;
 		this.state = 0;	
+		this.isSub=isSub;
 		this.session = [];
 		this.active = false;
 		this.steps = [];
 		this.note = "";
 		this.id = lastId;
+		this.parentId = pid;
 		lastId++;
-		taskList.push(JSON.stringify(this))
-		addArray("taskList", taskList)
-		console.log(this)
+		taskList.push(this)
+		addDataObject("taskList", taskList)
 	}
 
-	startTask(){
-		if (this.active){
-			console.log("task already running");
-			return ;
-		}
-		this.startWipDate = Date.now();
-		console.log(`task ${this.name} is started, now focus on it and come back when you finish`);
-		this.state = 1;
-		this.active = true;
-	}
+	setDuration(minutes){
+		this.duration += minutes;
 
-	endTask() {	
-		if (!this.active){
-			console.log("task cant be terminated, without being launched");
-			return;
-		}
-		console.log("terminating this task");
-		this.duration += chronoApp.msToMinutes(Date.now()-this.startWipDate)
-		let endWipDate = Date.now(); 
-		this.session.push([this.startWipDate, endWipDate]);
-		this.state = 1;
-		this.active = false;
-		this.startWipDate = 0;
-		
 	}
 
 	closeTask(){
@@ -75,8 +48,8 @@ class Task{
 		this.state = 2;
 	}
 
-	createSubtask(name="my first sub task", desc = "learn more about task management with Owly", duration = 0, creationDate = new Date()){
-		const nTask = new Task(name, desc, duration, creationDate);
+	createSubtask(name="my first sub task", desc = "learn more about task management with Owly", duration = 0, creationDate = new Date(), isSub= true){
+		const nTask = new Task(name, desc, duration, creationDate, isSub, this.id);
 		this.steps.push(nTask.id);
 	}
 

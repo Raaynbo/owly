@@ -5,7 +5,7 @@ import {chronoApp} from "../js/components/chrono.js";
 
 const hidden_info = ["steps", "active", "startWipDate", "endWipDate", "session", "note"]
 
-function detailView(app, object){
+function detailView(app, user){
 	const main = document.createElement('div');
 	const navbar = document.createElement('nav');
 	const home_btn = document.createElement("span");
@@ -57,13 +57,9 @@ function detailView(app, object){
 	my_taskbox.appendChild(my_task);
 	my_taskbox.appendChild(worktable);
 	
-	createInfo(info_project, object.project);
+	createInfo(info_project, user);
 	info_container.appendChild(info_project);
 
-	if ( object.project != object.task){
-		createInfo(info_task, object.task);
-		info_container.appendChild(info_task);
-	}
 
 	info_start.textContent = "Start";
 	info_stop.textContent = "Stop";
@@ -74,67 +70,47 @@ function detailView(app, object){
 	info_playlist_row.appendChild(info_session);
 	info_container.appendChild(info_playlist_row);
 
-	if (object.task.steps.length != 0){
-		object.task.steps.forEach((task) => {
-			createCard(my_task,["list", "action"],task, "task", object.project);
-		});
-	}
-	createWorktable(worktable, object.task)
+	//if (users.tasks[focus].steps.length != 0){
+	//	object.task.steps.forEach((task) => {
+	//		createCard(my_task,["list", "action"],task, "task", user.tasks);
+	//	});
+	//}
+	createWorktable(worktable, user)
 	worktable.classList.add("worktable")
 
 	
 	home_btn.addEventListener("click",(e)=> {
-		renderApp("home");
+		user.focus = false;
+		user.page = "home";
+		user.focusId= -1;
+		renderApp(user);
 	})	
 
-	my_task.addEventListener("click", (e)=>{
-		if(e.target.classList.contains("card")){
-			renderApp("detail", e.target.itemInfo);
-		}
-	});
 	const svg = document.querySelector("path")
 	const list_el = document.querySelectorAll("li");
 
 	info_project.addEventListener("click", (e) => {
 		if (e.target != svg){
 			object = {
-				project: object.project,
-				task: object.project
+				project: user.tasks[user.focusId],
+				task: user.tasks[user.focusId]
 			}
 		}else{
-			object.project.toggleFav();
+			user.tasks[user.focusId].toggleFav();
 		}
-		renderApp("detail", object)
+		renderApp(user)
 		
-	})
-	list_el.forEach((el) => { 
-	el.addEventListener("click",(e) => {
-			el.itemInfo = {
-				project: object.project,
-				type: "task",
-				task: el.itemInfo.task
-			}
-			renderApp("detail", el.itemInfo)
-		});
-	});
-	const action_1 = document.querySelectorAll(".action")
-	action_1.forEach((action)=> {
-		action.addEventListener("click", (e) => {
-		action.itemInfo = {
-			project:object.project,
-			type: "task",
-			task: object.task
-		}
-		renderApp("detail", action.itemInfo)
-		})
 	})
 	info_start.addEventListener("click", (e) => chronoApp.start());
 	info_stop.addEventListener("click", (e) => {
 		let  minutes = chronoApp.stop()
 		console.log(minutes)
 
-		object.project.setDuration(minutes)
-		renderApp("detail", object)
+		console.log(user)
+		user.tasks[user.focusId].duration += minutes
+		user.save()
+		
+		renderApp(user)
 	});
 	info_session.addEventListener("click", (e) => {
 		console.log(chronoApp);
@@ -142,12 +118,13 @@ function detailView(app, object){
 }
 
 
-function createInfo(container, object){
+function createInfo(container, user){
 	const titleinfo = document.createElement('div');
 	const actioninfo = document.createElement('div');
 	titleinfo.classList.add("info_project");
 	actioninfo.classList.add("info_action");
 	container.appendChild(titleinfo);
+	const object = user.tasks[user.focusId];
 	for (const key in object){
 		const infodiv = document.createElement('div');
 
@@ -203,14 +180,15 @@ function createInfo(container, object){
 	container.appendChild(actioninfo);
 }
 
-function createWorktable(container, task){
+function createWorktable(container, user){
 	const buttonzone = document.createElement('div');
 	const editzone = document.createElement('div');
 	const textarea = document.createElement('textarea');
+	console.log(user.tasks[user.focusId])
 	
 	editzone.classList.add("editzone");
-	editzone.textContent = task.note;
-	if (task.note == ""){
+	editzone.textContent = user.tasks[user.focusId].note;
+	if (user.tasks[user.focusId].note == ""){
 		editzone.textContent = " You can take note here! double tap to write something !";
 		textarea.placeholder = " You can take note here! double tap to write something !";
 	}
@@ -221,14 +199,15 @@ function createWorktable(container, task){
 		container.replaceChild(textarea, editzone);
 		textarea.classList.toggle("editzone");
 		editzone.classList.toggle("hidden");
-		textarea.value = task.note;
+		textarea.value = user.tasks[user.focusId].note;
 	})
 	
 	textarea.addEventListener("mouseout", (e)=> {
 		container.replaceChild(editzone, textarea);
 		textarea.classList.toggle("editzone");
 		editzone.textContent = textarea.value;
-		task.setNote(textarea.value);
+		user.tasks[user.focusId].note = textarea.value;
+		user.save();
 	})
 	
 }

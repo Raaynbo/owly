@@ -10,13 +10,14 @@ const tree = [];
 // list of parameter
 // -FORM
 // -ACTION (create multiple choice with accorded action)
-
+let user;
 
 //args = attributes, title,object 
-function createModal(title="OWLY GOT INFOS FOR YOU", attribute=[], user){
+function createModal(title="OWLY GOT INFOS FOR YOU", attribute=[], usr){
 	const modal = document.createElement("div");
 	modal.classList.add("modal");
 
+	user = usr;
 	// close btn
 	const close_btn = document.createElement('button');
 	close_btn.classList.add("modal_close");
@@ -72,7 +73,7 @@ function createForm(container, user){
 	const inputList = [];
 
 	const treeSelector = document.createElement('div');
-	createTreeSelector(treeSelector, user);
+	//createTreeSelector(treeSelector, user);
 
 	labelname.textContent = "Name \t";
 	labeldesc.textContent = "Description \t";
@@ -89,34 +90,15 @@ function createForm(container, user){
 	inputpriority.min = 0;
 	inputpriority.max = 3;
 
-	pjt_btn.textContent = "project";
-	pjt_btn.classList.add("btn_form");
-	task_btn.classList.add("btn_form");
 	form.classList.add("form");
-	type_zone.classList.add("bar");
 	
-	task_btn.textContent = "task";
 
-	type_zone.appendChild(pjt_btn);
-	type_zone.appendChild(task_btn);
 	
 	inputList.push(inputname);
 	inputList.push(inputdesc);
 	inputList.push(inputdate);
 	inputList.push(inputpriority);
 	
-	task_btn.addEventListener("click", (e)=>{
-		form.appendChild(treeSelector);
-		task_btn.classList.add("selected");
-		pjt_btn.classList.remove("selected");
-	});
-	pjt_btn.addEventListener("click", (e)=>{
-		if (Array.from(form.childNodes).find(node => node.isEqualNode(treeSelector))){
-			form.removeChild(treeSelector);
-		}
-		pjt_btn.classList.add("selected");
-		task_btn.classList.remove("selected");
-	});
 
 	inputsubmit.addEventListener("click", (e)=>{
 		let obj = {
@@ -126,30 +108,8 @@ function createForm(container, user){
 		if(!verifyInput(inputList)){
 			return false;	
 		}
-		if (pjt_btn.classList.contains("selected")){
-			user.createNewProject(inputname.value, inputdesc.value, inputnote.value)
-			obj = {
-				project: user.projects[user.projects.length-1],
-				task:user.projects[user.projects.length-1]
-			}
-		}else{
-			if (currTreeSelector == undefined){
-				console.log("please select a project or a task first in the tree Viz")
-				return false;
-			}
-			console.log(currTreeSelector);
-			if (tree.length == 1){
-				user.setProjectFocused(user.projects.findIndex((pjt)=> {return pjt==currTreeSelector}));
-				user.createNewTask(inputname.value, inputdesc.value);
-			}else{
-				currTreeSelector.createSubtask(inputname.value, inputdesc.value);
-			}
-			obj = {
-				project:user.projects[tree[0]],
-				task:currTreeSelector
-			}
-		}
-		renderApp("home")
+		user.createTask(inputname.value, inputdesc.value)
+		user.page = "home";
 		closeModal();
 
 	})
@@ -184,7 +144,7 @@ function createTreeSelector(container, user){
 	rootbtn.textContent = "root";
 	backbtn.textContent = "back";
 
-	let dir = user.projects[tree[0]];
+	let dir = user.tasks[tree[0]];
 	for (let i=1 ; i<=tree.length-1;i++){
 		
 	}
@@ -280,7 +240,7 @@ function closeModal(){
 
 	modal.remove();
 	overlay.remove();
-	renderApp("home")
+	renderApp(user)
 }
 
 export {createModal};

@@ -20,13 +20,18 @@ function homeView(app, user){
 	main.appendChild(project_container);
 	main.appendChild(tree_container);
 	
-	user.projects.forEach((project) => {
-		createCard(project_container, ["list"], project, "project", project);
+	console.log(user)
+	user.tasks.forEach((task) => {
+		createCard(project_container, ["list"], task, "project", task);
 		
 	})
 	project_container.addEventListener("click", (e) => {
 		if (e.target.classList.contains("card")){
-			renderApp("detail", e.target.itemInfo);
+			user.focus = true;
+			user.page = "detail";
+			user.focusId = e.target.itemInfo.task.id;
+			console.log(e.target.itemInfo.task.id)
+			renderApp(user);
 		}
 	})
 	const list_el = document.querySelectorAll("li");

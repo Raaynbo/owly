@@ -2,20 +2,11 @@ import {User} from "./user.js";
 import {addDataObject, getObject, addArray, getArray} from "./components/storage.js";
 
 function introduction(user){
-	user.createNewProject();
-	const base_project_id = 0;
-	user.setProjectFocused(0);
-	addDataObject("project", user.projects[0]);
-	const obj = getObject("project")
-	user.createNewTask("MY fantastic first task");
-	const target = user.projects[base_project_id].steps[0];
-	target.createSubtask();
-	target.createSubtask("my second subtask");
-	target.createSubtask("my third subtask");
-	target.createSubtask("my fourth subtask");
-	target.createSubtask("my fifth subtask");
-	const array = getArray("taskList");
-	console.table(array);
+	console.log("WIP")
+	user.createTask("a new task", "a new desc");
+	user.createTask("a new task 1", "a new desc");
+	user.createTask("a new task 7", "a new desc");
+	user.createTask("a new task 8", "a new desc");
 }
 
 

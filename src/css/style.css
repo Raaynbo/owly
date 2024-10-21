@@ -27,6 +27,7 @@ body {
 	width: 100%;
 	display: flex;
 	flex-wrap: wrap;
+	gap: -4rem 0rem;
 }
 
 .side_container {
