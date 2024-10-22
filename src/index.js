@@ -33,6 +33,7 @@ const app = function (){
 	}else{
 		user.loadTask()
 	}
+	
 
 	user.page="home";
 
