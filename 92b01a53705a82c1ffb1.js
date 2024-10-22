@@ -28,11 +28,11 @@ action_btn.addEventListener("click", (e) => {
 
 const app = function (){
 	if (localStore()){
-		console.log("introduction")
 		introduction(user);
 	}else{
 		user.loadTask()
 	}
+	
 
 	user.page="home";
 
@@ -50,7 +50,6 @@ function renderApp(user){
 			detailView(content, user);
 			break;
 	}
-	console.log(appInfo)
 }
 
 
