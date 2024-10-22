@@ -20,7 +20,6 @@ function homeView(app, user){
 	main.appendChild(project_container);
 	main.appendChild(tree_container);
 	
-	console.log(user)
 	user.tasks.forEach((task) => {
 		createCard(project_container, ["list"], task, "project", task);
 		
@@ -30,7 +29,6 @@ function homeView(app, user){
 			user.focus = true;
 			user.page = "detail";
 			user.focusId = e.target.itemInfo.task.id;
-			console.log(e.target.itemInfo.task.id)
 			renderApp(user);
 		}
 	})
@@ -39,17 +37,14 @@ function homeView(app, user){
 	el.addEventListener("click",(e) => {
 			let pjt = el;
 			while (!pjt.classList.contains("card")){
-				console.log(pjt.itemInfo);
 				pjt = pjt.parentNode;
-				console.log(pjt.itemInfo);
 			}
 			pjt.itemInfo = {
 				project: pjt.itemInfo.project,
 				type: "task",
 				task: el.itemInfo.task
 			}
-			console.log(pjt.itemInfo);
-			renderApp("detail", pjt.itemInfo)
+			renderApp(user)
 		});
 	});
 }

@@ -27,6 +27,7 @@ class User{
 	save(){
 		addDataObject('taskList', this.tasks)
 	}
+	
 }
 
 

@@ -36,7 +36,6 @@ class Task{
 
 	setDuration(minutes){
 		this.duration += minutes;
-
 	}
 
 	closeTask(){
@@ -56,6 +55,11 @@ class Task{
 
 	setNote(value){
 		this.note = value;
+	}
+
+	removeTask(user){
+		delete user.tasks[this.id];
+		return true;
 	}
 
 

@@ -3,7 +3,7 @@ import {createCard} from "../js/components/card.js";
 import {renderApp} from "../index.js";
 import {chronoApp} from "../js/components/chrono.js";
 
-const hidden_info = ["steps", "active", "startWipDate", "endWipDate", "session", "note"]
+const hidden_info = ["steps","id",  "active", "startWipDate", "endWipDate", "session", "note", "parentId", "isSub"]
 
 function detailView(app, user){
 	const main = document.createElement('div');
@@ -63,7 +63,7 @@ function detailView(app, user){
 
 	info_start.textContent = "Start";
 	info_stop.textContent = "Stop";
-	info_session.textContent = "00:00:00";
+	info_session.textContent = "Delete";
 	info_playlist.appendChild(info_start);
 	info_playlist.appendChild(info_stop);
 	info_playlist_row.appendChild(info_playlist);
@@ -89,18 +89,6 @@ function detailView(app, user){
 	const svg = document.querySelector("path")
 	const list_el = document.querySelectorAll("li");
 
-	info_project.addEventListener("click", (e) => {
-		if (e.target != svg){
-			object = {
-				project: user.tasks[user.focusId],
-				task: user.tasks[user.focusId]
-			}
-		}else{
-			user.tasks[user.focusId].toggleFav();
-		}
-		renderApp(user)
-		
-	})
 	info_start.addEventListener("click", (e) => chronoApp.start());
 	info_stop.addEventListener("click", (e) => {
 		let  minutes = chronoApp.stop()
@@ -113,7 +101,12 @@ function detailView(app, user){
 		renderApp(user)
 	});
 	info_session.addEventListener("click", (e) => {
-		console.log(chronoApp);
+		delete user.tasks[user.focusId];
+		user.page="home";
+		user.focus = false;
+		user.focusId = -1;
+		user.save();
+		renderApp(user);
 	});
 }
 
@@ -169,6 +162,7 @@ function createInfo(container, user){
 					actioninfo.textContent = "Done";
 					container.classList.add("finished")
 				}
+				break;
 			default:
 				infodiv.textContent = key + " : " + object[key];
 				container.appendChild(infodiv);

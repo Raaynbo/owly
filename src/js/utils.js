@@ -3,10 +3,7 @@ import {addDataObject, getObject, addArray, getArray} from "./components/storage
 
 function introduction(user){
 	console.log("WIP")
-	user.createTask("a new task", "a new desc");
-	user.createTask("a new task 1", "a new desc");
-	user.createTask("a new task 7", "a new desc");
-	user.createTask("a new task 8", "a new desc");
+	user.createTask("OWLY", "a new desc");
 }
 
 

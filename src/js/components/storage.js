@@ -38,6 +38,10 @@ function populateStorage(){
 	localStorage.setItem("bgcolor", "blue");
 }
 
+function removeObject(name){
+	localStorage.remove(name);
+}
+
 function storageAvailable(type){
 	let storage;
 	try{
