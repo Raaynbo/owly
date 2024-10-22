@@ -1,17 +1,8 @@
 import {chronoApp} from "../js/components/chrono.js";
 import {addDataObject, getObject, addArray, getArray} from "./components/storage.js";
 
-let taskList = getObject("taskList") ;
+let taskList;
 let lastId;
- if (taskList == ""){
-	lastId = 0
-	
-	
- }else{
-	taskList = getObject("taskList");
-	taskList.length == 0? lastId = 0 : lastId = taskList.length-1;
- }
- 
 
 
 class Task{
@@ -29,6 +20,12 @@ class Task{
 		this.note = "";
 		this.id = lastId;
 		this.parentId = pid;
+		taskList = getObject("taskList");
+		if (taskList == null){
+			console.log("null")
+			lastId = 0;
+			taskList =[];
+		}
 		lastId++;
 		taskList.push(this)
 		addDataObject("taskList", taskList)

@@ -3,7 +3,7 @@
 function localStore(){
 	let taskList = getObject("taskList") ;
 	let lastId;
-	 if (taskList == ""){
+	 if (taskList == "" || taskList == null){
 		console.log("no task list")
 		lastId = 0
 		return true;	

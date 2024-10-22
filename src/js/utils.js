@@ -3,7 +3,9 @@ import {addDataObject, getObject, addArray, getArray} from "./components/storage
 
 function introduction(user){
 	console.log("WIP")
-	user.createTask("OWLY", "a new desc");
+	user.createTask("INTRO", "a new desc");
+	user.createTask("INTwskO", "a new desc");
+	user.createTask("INwRO", "a new desc");
 }
 
 

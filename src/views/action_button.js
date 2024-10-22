@@ -1,4 +1,4 @@
-import {ceateModal} from "../js/components/popup.js";
+import {createModal} from "../js/components/popup.js";
 
 
 function actionView(user){

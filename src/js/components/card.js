@@ -3,6 +3,7 @@ function createCard(container, attribute=[], data, type, project){
 
 	card.classList.add("card");
 	
+	console.log(data)
 	card.textContent = data.name;
 	card.itemInfo = {
 			project: project,

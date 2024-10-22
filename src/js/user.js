@@ -1,5 +1,4 @@
 import {Task} from "./task.js";
-import {Project} from "./projects.js";
 import {getObject, addDataObject} from "./components/storage.js";
 
 class User{
@@ -18,6 +17,12 @@ class User{
 
 	loadTask(){
 		let tl = getObject('taskList');		
+		console.log(tl)
+		if (tl == [null]){
+			console.log("hoho")
+			tl = [];
+			save();
+		}
 		for (let i = 0 ; i <= tl.length-1; i++){
 			this.tasks.push(tl[i]);
 		}

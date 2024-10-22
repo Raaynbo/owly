@@ -1,4 +1,3 @@
-import {Project} from "../js/projects.js"; 
 import {createCard} from "../js/components/card.js";
 import {renderApp} from "../index.js";
 import {chronoApp} from "../js/components/chrono.js";
@@ -70,11 +69,6 @@ function detailView(app, user){
 	info_playlist_row.appendChild(info_session);
 	info_container.appendChild(info_playlist_row);
 
-	//if (users.tasks[focus].steps.length != 0){
-	//	object.task.steps.forEach((task) => {
-	//		createCard(my_task,["list", "action"],task, "task", user.tasks);
-	//	});
-	//}
 	createWorktable(worktable, user)
 	worktable.classList.add("worktable")
 
@@ -93,19 +87,25 @@ function detailView(app, user){
 	info_stop.addEventListener("click", (e) => {
 		let  minutes = chronoApp.stop()
 		console.log(minutes)
-
-		console.log(user)
-		user.tasks[user.focusId].duration += minutes
+		let target = user.tasks.findIndex((task) => {return task.id==user.focusId});
+		user.tasks[target].duration += minutes
 		user.save()
-		
 		renderApp(user)
 	});
 	info_session.addEventListener("click", (e) => {
-		delete user.tasks[user.focusId];
+		let target = user.tasks.findIndex((task) => {return task.id==user.focusId});
+		console.log(target)
+		console.log(user.tasks)
+		user.tasks.splice(target, 1);
+		//if (user.tasks = null){
+		//	console.log("warning")
+		//	user.tasks = [];
+		//}
 		user.page="home";
 		user.focus = false;
 		user.focusId = -1;
 		user.save();
+		console.log(user.tasks)
 		renderApp(user);
 	});
 }
@@ -117,7 +117,8 @@ function createInfo(container, user){
 	titleinfo.classList.add("info_project");
 	actioninfo.classList.add("info_action");
 	container.appendChild(titleinfo);
-	const object = user.tasks[user.focusId];
+	let target = user.tasks.findIndex((task) => {return task.id==user.focusId});
+	const object = user.tasks[target];
 	for (const key in object){
 		const infodiv = document.createElement('div');
 
@@ -178,11 +179,12 @@ function createWorktable(container, user){
 	const buttonzone = document.createElement('div');
 	const editzone = document.createElement('div');
 	const textarea = document.createElement('textarea');
+	let target = user.tasks.findIndex((task) => {return task.id==user.focusId});
 	console.log(user.tasks[user.focusId])
 	
 	editzone.classList.add("editzone");
-	editzone.textContent = user.tasks[user.focusId].note;
-	if (user.tasks[user.focusId].note == ""){
+	editzone.textContent = user.tasks[target].note;
+	if (user.tasks[target].note == ""){
 		editzone.textContent = " You can take note here! double tap to write something !";
 		textarea.placeholder = " You can take note here! double tap to write something !";
 	}
@@ -193,14 +195,14 @@ function createWorktable(container, user){
 		container.replaceChild(textarea, editzone);
 		textarea.classList.toggle("editzone");
 		editzone.classList.toggle("hidden");
-		textarea.value = user.tasks[user.focusId].note;
+		textarea.value = user.tasks[target].note;
 	})
 	
 	textarea.addEventListener("mouseout", (e)=> {
 		container.replaceChild(editzone, textarea);
 		textarea.classList.toggle("editzone");
 		editzone.textContent = textarea.value;
-		user.tasks[user.focusId].note = textarea.value;
+		user.tasks[target].note = textarea.value;
 		user.save();
 	})
 	
