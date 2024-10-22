@@ -1,19 +1,20 @@
-function createCard(container, attribute=[], data, type, project){
+function createCard(container, attribute=[], data, type, user){
 	const card = document.createElement('div');
 
 	card.classList.add("card");
 	
 	console.log(data)
+	console.log(user)
 	card.textContent = data.name;
 	card.itemInfo = {
-			project: project,
+			user: user,
 			task: data
 	};
 
 	attribute.forEach((attr) => {
 		switch(attr){
 			case "list":
-				createList(card, data.steps);
+				createList(card, data);
 				break;
 			case "action":
 				createActionZone(card, data);
@@ -32,12 +33,13 @@ function createList(container, data){
 	const card_list = document.createElement('ul');
 	const card_title = document.createElement('div');
 
-	let id = 0;
+	console.log(data);
+	let id = data.id;
 	card_list.classList.add("card_list");
 	card_title.classList.add("list_title");
 
 	card_list.appendChild(card_title);
-	data.forEach((sub) => {
+	data.steps.forEach((sub) => {
 		const list_el = document.createElement("li");
 		list_el.classList.add("list_el");
 		list_el.textContent = sub.name;

@@ -94,8 +94,6 @@ function detailView(app, user){
 	});
 	info_session.addEventListener("click", (e) => {
 		let target = user.tasks.findIndex((task) => {return task.id==user.focusId});
-		console.log(target)
-		console.log(user.tasks)
 		user.tasks.splice(target, 1);
 		//if (user.tasks = null){
 		//	console.log("warning")
@@ -105,7 +103,6 @@ function detailView(app, user){
 		user.focus = false;
 		user.focusId = -1;
 		user.save();
-		console.log(user.tasks)
 		renderApp(user);
 	});
 }
@@ -118,6 +115,7 @@ function createInfo(container, user){
 	actioninfo.classList.add("info_action");
 	container.appendChild(titleinfo);
 	let target = user.tasks.findIndex((task) => {return task.id==user.focusId});
+	console.log(target)
 	const object = user.tasks[target];
 	for (const key in object){
 		const infodiv = document.createElement('div');
@@ -179,8 +177,8 @@ function createWorktable(container, user){
 	const buttonzone = document.createElement('div');
 	const editzone = document.createElement('div');
 	const textarea = document.createElement('textarea');
-	let target = user.tasks.findIndex((task) => {return task.id==user.focusId});
-	console.log(user.tasks[user.focusId])
+	let target = user.tasks.findIndex((task) => {if (task.id==user.focusId) return true});
+	console.log(target)
 	
 	editzone.classList.add("editzone");
 	editzone.textContent = user.tasks[target].note;

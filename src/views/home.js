@@ -22,7 +22,8 @@ function homeView(app, user){
 	
 	user.tasks.forEach((task) => {
 		console.log(user.tasks)
-		createCard(project_container, ["list"], task, "project", task);
+		console.log(task)
+		createCard(project_container, ["list"], task, "project", user);
 		
 	})
 	project_container.addEventListener("click", (e) => {

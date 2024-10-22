@@ -1,9 +1,16 @@
 import {chronoApp} from "../js/components/chrono.js";
 import {addDataObject, getObject, addArray, getArray} from "./components/storage.js";
 
-let taskList;
 let lastId;
 
+let taskList = getObject("taskList");
+if (taskList == null){
+	console.log("null")
+	lastId = 0;
+	taskList =[];
+}else{
+	taskList.length == 0 ? lastId = 0 : lastId = taskList.length-1;
+}
 
 class Task{
 	constructor (tname = "my first task", desc = "Learn about how we help you handle your task", drtn=0, cDate = "2024-09-27", isSub=false, pid=-1){
@@ -18,14 +25,18 @@ class Task{
 		this.active = false;
 		this.steps = [];
 		this.note = "";
-		this.id = lastId;
 		this.parentId = pid;
 		taskList = getObject("taskList");
 		if (taskList == null){
 			console.log("null")
 			lastId = 0;
 			taskList =[];
+		}else{
+			taskList.length == 0 ? lastId = 0 : lastId = taskList.length;
 		}
+		
+		console.log(taskList.length)
+		this.id = lastId;
 		lastId++;
 		taskList.push(this)
 		addDataObject("taskList", taskList)
