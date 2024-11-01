@@ -16,12 +16,25 @@ module.exports = {
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: "./src/template.html",
-			title:"my restaurant page",
+			title:"Owly",
 			filename:'index.html',
 		}),	
 	],
 	module:{ 
 		rules: [
+			{
+				test: /\.(?:js|mjs|cjs)$/,
+				exclude: /node_modules/,
+				use: {
+					loader: 'babel-loader',
+					options: {
+						targets: "defaults",
+						presets: [
+						    ['@babel/preset-env']
+						  ]
+					}
+			      }
+			},
 			{
 				test: /\.html$/i,
 				loader: "html-loader",
